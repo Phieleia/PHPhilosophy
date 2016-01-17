@@ -12,7 +12,8 @@ $database = [];
 /* 
  * PLEASE CHANGE THESE VALUES ACCORDINGLY!
  */
- 
+// The driver of your database
+$database['dbdriver'] = 'mysql';
 // The name of your database server
 $database['dbhost']   = 'localhost';
 // The name of your database user
