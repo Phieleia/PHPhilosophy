@@ -4,7 +4,7 @@
  * Configuration of database
  *
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2015-2016 PHPhilosophy
+ * @copyright   2015-2016 Lisa Saalfrank
  * @license	    http://opensource.org/licenses/MIT MIT License
  */
 $database = [];

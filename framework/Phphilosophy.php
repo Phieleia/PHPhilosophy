@@ -9,10 +9,10 @@ use Phphilosophy\Router\Router;
  * Phphilosophy Micro PHP Framework for PHP 5.5
  *
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2015-2016 PHPhilosophy
- * @license     http://opensource.org/licenses/MIT MIT License
- * @since       1.0.0
- * @version     1.0.0
+ * @copyright   2015-2016 Lisa Saalfrank
+ * @license	    http://opensource.org/licenses/MIT MIT License
+ * @since       0.1.0
+ * @version     0.1.0
  * @package     Phphilosophy
  */
 class Phphilosophy {
@@ -20,7 +20,7 @@ class Phphilosophy {
     /**
      * @const   string
      */
-    const VERSION = '1.0.0';
+    const VERSION = '0.1.0';
     
     /**
      * @access  private
