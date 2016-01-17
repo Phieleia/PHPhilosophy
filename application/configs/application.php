@@ -14,4 +14,4 @@ $configs = [];
  */
  
 // The name of your Phphilosophy project
-$configs['app.name']   = 'Application';
+$configs['app.name'] = 'Application';
