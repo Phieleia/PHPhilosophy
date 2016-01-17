@@ -27,4 +27,4 @@ $database['dbname']   = 'database';
  */
  
 // The default character set
-$database['dbchar']   = 'utf8';
+$database['dbchar'] = 'utf8';
