@@ -28,9 +28,6 @@ $autoload->add($configs['app.name'] . '\\Library', __DIR__ . '/../application/li
 // register the autoloader
 $autoload->register();
 
-// Load project settings
-$config = Config::getInstance();
-
 // Add config values
-$config->set('database', $database);
-$config->set('app.name', $configs['app.name']);
+Config::set('database', $database);
+Config::set('app.name', $configs['app.name']);

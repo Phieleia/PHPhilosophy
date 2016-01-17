@@ -34,12 +34,6 @@ class Route {
      * @var     array   The http method
      */
     private $methods = [];
-
-    /**
-     * @access  private
-     * @var     \Phphilosophy\Application\Config    App config
-     */
-    private $config;
     
     /**
      * @access  public
@@ -49,7 +43,6 @@ class Route {
      */
     public function __construct($pattern, $action, $methods)
     {
-        $this->config = Config::getInstance();
         $this->setPattern($pattern);
         $this->setAction($action);
         $this->setMethods($methods);
@@ -105,7 +98,7 @@ class Route {
     private function createCallable($controller, $method)
     {
         // The namespace to be used with controllers
-        $namespace = '\\' . $this->config->get('app.name') . '\\Controller\\';
+        $namespace = '\\' . Config::get('app.name') . '\\Controller\\';
         $controller = $namespace . $controller;
         
         // Create new anonymous function which calls controller -> method

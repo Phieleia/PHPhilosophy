@@ -19,31 +19,7 @@ class Config {
      * @access  private
      * @var     array   Array with configuration values
      */
-    private $config = [];
-    
-    /**
-     * @access  protected
-     * @var     \Phphilosophy\Application\Config    Instance of this class
-     */
-    protected static $instance;
-    
-    /**
-     * @access  private
-     */
-    private function __construct() {}
-    
-    /**
-     * Replacement for the now private constructor
-     * @access  public
-     * @return  \Phphilosophy\Application\Config    Self
-     */
-    public static function getInstance()
-    {
-        if (is_null(self::$instance)) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+    private static $config = [];
     
     /**
      * @access  public
@@ -51,8 +27,8 @@ class Config {
      * @param   mixed   $value  The configuration item
      * @return  void
      */
-    public function set($key, $value) {
-        $this->config[$key] = $value;
+    public static function set($key, $value) {
+        self::$config[$key] = $value;
     }
     
     /**
@@ -60,7 +36,7 @@ class Config {
      * @param   string  $key    The configuration name
      * @return  mixed   The configuration value
      */
-    public function get($key) {
-        return $this->config[$key];
+    public static function get($key) {
+        self::$config[$key];
     }
 }
