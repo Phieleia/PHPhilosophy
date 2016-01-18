@@ -12,6 +12,7 @@ $database = [];
 /* 
  * PLEASE CHANGE THESE VALUES ACCORDINGLY!
  */
+
 // The driver of your database
 $database['dbdriver'] = 'mysql';
 // The name of your database server
@@ -26,6 +27,8 @@ $database['dbname']   = 'database';
 /**
  * ADDITIONAL CONFIGURATION VALUES
  */
- 
+
 // The default character set
 $database['dbchar'] = 'utf8';
+// Database prefix that's added to your table names
+$database['dbprefix'] = '';
