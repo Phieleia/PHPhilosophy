@@ -16,19 +16,16 @@ namespace Phphilosophy\Autoload;
 class Autoload {
     
     /**
-     * @access  private
      * @var     array   Array of namespace prefixes
      */
     private $prefixes = [];
     
     /**
-     * @access  private
      * @var     string  The current namespace prefix
      */
     private $currentPrefix;
     
     /**
-     * @access  public
      * @param   string  $prefix     Namespace prefix
      * @param   string  $directory  Referenced directory
      * @return  void
@@ -41,7 +38,6 @@ class Autoload {
     }
     
     /**
-     * @access  private
      * @param   string  $class  The classname
      * @return  bool    Returns, whether a known base path was found
      */
@@ -69,7 +65,6 @@ class Autoload {
     }
     
     /**
-     * @access  private
      * @param   string  $classname  The current classname
      * @return  string  The path to the class
      */
@@ -97,7 +92,6 @@ class Autoload {
     }
     
     /**
-     * @access  public
      * @param   string  $class  The class to load
      * @return  bool    Whether the class could be loaded
      */
@@ -115,7 +109,6 @@ class Autoload {
     }
     
     /**
-     * @access  public
      * @param   bool    $prepend    Config for autoload function
      * @return  void
      */

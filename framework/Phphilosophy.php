@@ -23,21 +23,16 @@ class Phphilosophy {
     const VERSION = '0.1.0';
     
     /**
-     * @access  private
      * @var     \Phphilosophy\Router\Router
      */
     private $router;
     
-    /**
-     * @access  public
-     */
     public function __construct()
     {
         $this->router = new Router();
     }
     
     /**
-     * @access  public
      * @param   string          $pattern
      * @param   mixed           $action
      * @return  void
@@ -47,7 +42,6 @@ class Phphilosophy {
     }
     
     /**
-     * @access  public
      * @param   string          $pattern
      * @param   mixed           $action
      * @return  void
@@ -57,7 +51,6 @@ class Phphilosophy {
     }
     
     /**
-     * @access  public
      * @param   string          $pattern
      * @param   mixed           $action
      * @return  void
@@ -67,7 +60,6 @@ class Phphilosophy {
     }
     
     /**
-     * @access  public
      * @param   string          $pattern
      * @param   mixed           $action
      * @return  void
@@ -77,7 +69,6 @@ class Phphilosophy {
     }
     
     /**
-     * @access  public
      * @param   string          $pattern
      * @param   mixed           $action
      * @return  void
@@ -87,7 +78,6 @@ class Phphilosophy {
     }
     
     /**
-     * @access  public
      * @param   string          $pattern
      * @param   mixed           $action
      * @return  void
@@ -99,7 +89,6 @@ class Phphilosophy {
     }
     
     /**
-     * @access  public
      * @param   array           $methods
      * @param   string          $pattern
      * @param   mixed           $action
@@ -110,7 +99,6 @@ class Phphilosophy {
     }
     
     /**
-     * @access  private
      * @param   string          $pattern    The route pattern
      * @param   mixed           $action     The route action
      * @param   array|string    $methods    The route method(s)
@@ -123,7 +111,6 @@ class Phphilosophy {
     }
 
     /**
-     * @access  public
      * @param   callable    $action     The fallback callable
      * @return  void
      */
@@ -132,7 +119,6 @@ class Phphilosophy {
     }
     
     /**
-     * @access  public
      * @return  void
      */
     public function run() {

@@ -16,26 +16,22 @@ namespace Phphilosophy\Http;
 class Request {
     
     /**
-     * @access  private
      * @var     array   Array with request information
      */
     private $request = [];
     
     /**
-     * @access  private
      * @var     array   Array with get/post data
      */
     private $input = [];
     
     /**
-     * @access  protected
      * @var     \Phphilosophy\Http\Request  Instance of this class
      */
     protected static $instance;
     
     /**
      * Saves the request data into an array
-     * @access  protected
      * @return  void
      */
     protected function setRequest()
@@ -53,17 +49,12 @@ class Request {
         $this->request['INPUT_STREAM'] = (string) file_get_contents('php://input');
     }
     
-    /**
-     * Saves the request data into an array
-     * @access  private
-     */
     private function __construct() {
         $this->setRequest();
     }
     
     /**
      * Replacement for the now private constructor
-     * @access  public
      * @return  \Phphilosophy\Http\Request  Self
      */
     public static function getInstance()
@@ -75,7 +66,6 @@ class Request {
     }
     
     /**
-     * @access  public
      * @return  string  The request method
      */
     public function method() {
@@ -84,7 +74,6 @@ class Request {
     
     /**
      * Returns the request URI as a string
-     * @access  public
      * @return  string  The request uri
      */
     public function uri() {
@@ -93,7 +82,6 @@ class Request {
     
     /**
      * Returns the segments of the request URI
-     * @access  public
      * @return  array   The array with URI segments
      */
     public function uriSegments()
@@ -103,7 +91,6 @@ class Request {
     }
     
     /**
-     * @access  private
      * @param   string|null $key        GET|POST-key
      * @param   mixed|null  $default    default value
      * @param   string      $method     method
@@ -133,7 +120,6 @@ class Request {
     }
     
     /**
-     * @access  private
      * @param   string  $method     Method
      * @return  void
      */
@@ -158,7 +144,6 @@ class Request {
     }
     
     /**
-     * @access  public
      * @param   string|null $key        get key
      * @param   mixed|null  $default    default value
      * @return  mixed|array
@@ -168,7 +153,6 @@ class Request {
     }
     
     /**
-     * @access  public
      * @param   string|null $key        get key
      * @param   mixed|null  $default    default value
      * @return  mixed|array

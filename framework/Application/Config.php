@@ -16,13 +16,11 @@ namespace Phphilosophy\Application;
 class Config {
     
     /**
-     * @access  private
      * @var     array   Array with configuration values
      */
     private static $config = [];
     
     /**
-     * @access  public
      * @param   string  $key    The configuration name
      * @param   mixed   $value  The configuration item
      * @return  void
@@ -32,7 +30,6 @@ class Config {
     }
     
     /**
-     * @access  public
      * @param   string  $key    The configuration name
      * @return  mixed   The configuration value
      */
