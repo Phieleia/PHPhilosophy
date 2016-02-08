@@ -91,10 +91,10 @@ class Matcher {
         $methods = $route->getMethods();
         
         // The current uri
-        $uri = '/' . trim($this->request->uri(), '/');
+        $uri = '/' . trim($this->request->getRequestTarget(), '/');
         
         // The current http method
-        $method = $this->request->method();
+        $method = $this->request->getMethod();
         
         return preg_match($regex, $uri) && in_array($method, $methods);
     }

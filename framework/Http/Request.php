@@ -66,9 +66,10 @@ class Request {
     }
     
     /**
-     * @return  string  The request method
+     * Retrieves the HTTP method of the request.
+     * @return  string  Returns the request method.
      */
-    public function method() {
+    public function getMethod() {
         return $this->request['REQUEST_METHOD'];
     }
     
@@ -76,7 +77,7 @@ class Request {
      * Returns the request URI as a string
      * @return  string  The request uri
      */
-    public function uri() {
+    public function getRequestTarget() {
         return $this->request['REQUEST_URI'];
     }
     
