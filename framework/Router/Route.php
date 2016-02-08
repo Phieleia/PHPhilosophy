@@ -18,25 +18,21 @@ use Phphilosophy\Application\Config;
 class Route {
     
     /**
-     * @access  private
      * @var     string  The route pattern
      */
     private $pattern;
     
     /**
-     * @access  private
      * @var     callable
      */
     private $action;
     
     /**
-     * @access  private
      * @var     array   The http method
      */
     private $methods = [];
     
     /**
-     * @access  public
      * @param   string          $pattern    The route pattern
      * @param   mixed           $action     The route action 
      * @param   array|string    $methods    The route methods
@@ -49,7 +45,6 @@ class Route {
     }
     
     /**
-     * @access  public
      * @param   string  $pattern    The route pattern
      * @return  void
      */
@@ -58,7 +53,6 @@ class Route {
     }
     
     /**
-     * @access  public
      * @return  string  The route pattern
      */
     public function getPattern() {
@@ -66,7 +60,6 @@ class Route {
     }
     
     /**
-     * @access  public
      * @param   mixed   $action     The route action
      * @return  void
      */
@@ -90,7 +83,6 @@ class Route {
     }
     
     /**
-     * @access  public
      * @param   string      $controller     The route controller
      * @param   string      $method         The route action
      * @return  callable    The route action
@@ -110,7 +102,6 @@ class Route {
     }
     
     /**
-     * @access  private
      * @param   string      $controller     The string to be checked
      * @return  boolean     Whether the string is a valid Controller notation
      */
@@ -122,7 +113,6 @@ class Route {
     }
     
     /**
-     * @access  public
      * @return  callable    The route action
      */
     public function getAction() {
@@ -130,7 +120,6 @@ class Route {
     }
     
     /**
-     * @access  public
      * @param   string|array    $methods    The route method(s)
      * @return  void
      */
@@ -144,7 +133,6 @@ class Route {
     }
     
     /**
-     * @access  public
      * @return  array   The route methods
      */
     public function getMethods() {

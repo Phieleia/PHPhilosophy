@@ -19,20 +19,15 @@ use Phphilosophy\Http\Uri;
 class Parser {
 
     /**
-     * @access  private
      * @var     \Phphilosophy\Http\Request  The current request
      */
     private $request;
     
-    /**
-     * @access  public
-     */
     public function __construct() {
         $this->request = Request::getInstance();
     }
     
     /**
-     * @access  private
      * @param   mixed   $segment    A segment of the route pattern
      * @return  bool    True for param, else false
      */
@@ -41,7 +36,6 @@ class Parser {
     }
     
     /**
-     * @access  private
      * @param   array   $uriSegments
      * @param   array   $patternSegments
      */
@@ -64,7 +58,6 @@ class Parser {
     }
     
     /**
-     * @access  public
      * @param   string  $pattern    The route pattern
      * @return  array   Route parameters
      */

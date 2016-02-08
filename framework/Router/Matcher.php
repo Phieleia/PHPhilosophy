@@ -18,13 +18,11 @@ use Phphilosophy\Http\Request;
 class Matcher {
     
     /**
-     * @access  private
      * @var     \Phphilosophy\Http\Request  The current request
      */
     private $request;
     
     /**
-     * @access  private
      * @var     array   An array with regex shortcuts
      */
     private $tokens = [
@@ -36,15 +34,11 @@ class Matcher {
         '' => '[A-Za-z0-9]+'
     ];
     
-    /**
-     * @access  public
-     */
     public function __construct() {
         $this->request = Request::getInstance();
     }
     
     /**
-     * @access  private
      * @param   string  $token      The parameter type
      * @param   string  $pattern    The route pattern
      * @return  string  The route regex
@@ -64,7 +58,6 @@ class Matcher {
     }
     
     /**
-     * @access  private
      * @param   \Phphilosophy\Router\Route  $route  A route instance
      * @return  string  The pattern as a regex
      */
@@ -86,7 +79,6 @@ class Matcher {
     }
     
     /**
-     * @access  public
      * @param   \Phphilosophy\Router\Route  $route  A route instance
      * @return  boolean     Was there any match?
      */

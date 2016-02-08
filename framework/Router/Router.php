@@ -16,45 +16,36 @@ namespace Phphilosophy\Router;
 class Router {
     
     /**
-     * @access  private
      * @var     array   Collection of Route instances
      */
     private $routes = [];
     
     /**
-     * @access  private
      * @var     callable    An anonymous function
      */
     private $notFound;
     
     /**
-     * @access  private
      * @var     \Phphilosophy\Router\Parser
      */
     private $parser;
     
     /**
-     * @access  private
      * @var     \Phphilosophy\Router\Matcher
      */
     private $matcher;
     
     /**
-     * @access  private
      * @var     boolean     Was there any match?
      */
     private $match = false;
 
-    /**
-     * @access  public
-     */
     public function __construct() {
         $this->parser = new Parser();
         $this->matcher = new Matcher();
     }
     
     /**
-     * @access  public
      * @param   \Phphilosophy\Router\Route  A route instance
      */
     public function addRoute(Route $route) {
@@ -62,7 +53,6 @@ class Router {
     }
     
     /**
-     * @access  public
      * @param   callable    $action     An anonymous function
      */
     public function setNotFound($action) {
@@ -70,7 +60,6 @@ class Router {
     }
 
     /**
-     * @access  private
      * @param   \Phphilosophy\Router\Route  $route  A route instance
      * @return  void
      */
@@ -88,7 +77,6 @@ class Router {
     }
     
     /**
-     * @access  public
      * @return  void
      */
     public function dispatch() {

@@ -7,7 +7,7 @@ namespace Phphilosophy\Http;
  *
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
  * @copyright   2015-2016 Lisa Saalfrank
- * @license	    http://opensource.org/licenses/MIT MIT License
+ * @license     http://opensource.org/licenses/MIT MIT License
  * @since       0.1.0
  * @version     0.1.0
  * @package     Phphilosophy
@@ -16,19 +16,16 @@ namespace Phphilosophy\Http;
 class Uri {
     
     /**
-     * @access  private
      * @var     string  The URI or the pattern
      */
     private $uri;
     
     /**
-     * @access  private
      * @var     array   Array of URI or pattern segments
      */
     private $segments = [];
     
     /**
-     * @access  public
      * @param   string  $uri    The URI or pattern
      */
     public function __construct($uri) {
@@ -37,7 +34,6 @@ class Uri {
     }
     
     /**
-     * @access  public
      * @param   string  $uri    The URI or pattern
      */
     public function setUri($uri) {
@@ -45,7 +41,6 @@ class Uri {
     }
     
     /**
-     * @access  public
      * @return  The URI or pattern of this instance
      */
     public function getUri() {
@@ -54,7 +49,6 @@ class Uri {
     
     /**
      * Splits the URI after each / and puts the segments into an array
-     * @access  public
      * @return  void
      */
     public function findSegments()
@@ -69,7 +63,6 @@ class Uri {
     }
     
     /**
-     * @access  public
      * @return  array   Array of URI or pattern segments
      */
     public function getSegments() {
@@ -78,7 +71,6 @@ class Uri {
     
     /**
      * Retrieves a single URI segment by key
-     * @access  public
      * @param   int     $key    The key of the uri segment
      * @return  string  A single uri segment
      */
