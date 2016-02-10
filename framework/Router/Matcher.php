@@ -34,8 +34,11 @@ class Matcher {
         '' => '[A-Za-z0-9]+'
     ];
     
-    public function __construct() {
-        $this->request = Request::getInstance();
+    /**
+     * @param   \Phphilosophy\Http\Request  $request
+     */
+    public function __construct(Request $request) {
+        $this->request = $request;
     }
     
     /**

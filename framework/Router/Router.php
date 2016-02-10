@@ -2,6 +2,8 @@
 
 namespace Phphilosophy\Router;
 
+use Phphilosophy\Http\Request;
+
 /**
  * Phphilosophy Router for HTTP routing
  *
@@ -26,6 +28,11 @@ class Router {
     private $notFound;
     
     /**
+     * @var     \Phphilosophy\Http\Request
+     */
+    private $request;
+    
+    /**
      * @var     \Phphilosophy\Router\Parser
      */
     private $parser;
@@ -41,8 +48,9 @@ class Router {
     private $match = false;
 
     public function __construct() {
-        $this->parser = new Parser();
-        $this->matcher = new Matcher();
+        $this->request = new Request();
+        $this->parser = new Parser($this->request);
+        $this->matcher = new Matcher($this->request);
     }
     
     /**

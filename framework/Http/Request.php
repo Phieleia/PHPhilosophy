@@ -26,11 +26,6 @@ class Request {
     private $input = [];
     
     /**
-     * @var     \Phphilosophy\Http\Request  Instance of this class
-     */
-    protected static $instance;
-    
-    /**
      * Saves the request data into an array
      * @return  void
      */
@@ -49,20 +44,8 @@ class Request {
         $this->request['INPUT_STREAM'] = (string) file_get_contents('php://input');
     }
     
-    private function __construct() {
+    public function __construct() {
         $this->setRequest();
-    }
-    
-    /**
-     * Replacement for the now private constructor
-     * @return  \Phphilosophy\Http\Request  Self
-     */
-    public static function getInstance()
-    {
-        if (is_null(self::$instance)) {
-            self::$instance = new self();
-        }
-        return self::$instance;
     }
     
     /**

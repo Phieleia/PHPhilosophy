@@ -2,8 +2,8 @@
 
 namespace Phphilosophy\Router;
 
-use Phphilosophy\Http\Request;
 use Phphilosophy\Http\Uri;
+use Phphilosophy\Http\Request;
 
 /**
  * Phphilosophy Uri parser
@@ -23,8 +23,11 @@ class Parser {
      */
     private $request;
     
-    public function __construct() {
-        $this->request = Request::getInstance();
+    /**
+     * @param   \Phphilosophy\Http\Request  $request
+     */
+    public function __construct(Request $request) {
+        $this->request = $request;
     }
     
     /**
