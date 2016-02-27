@@ -111,7 +111,7 @@ class Phphilosophy {
     }
 
     /**
-     * @param   callable    $action     The fallback callable
+     * @param   mixed   $action     The fallback callable
      * @return  void
      */
     public function notFound($action) {
