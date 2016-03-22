@@ -22,12 +22,13 @@ class View {
     /**
      * @var array
      */
-    private $variables = array();
+    private $variables = [];
     
     /**
      * @param   string  $views
      */
-    public function __construct($views = null) {
+    public function __construct($views = null)
+    {
         if ($views !== null) {
             $this->views = $views;
         }
@@ -37,7 +38,8 @@ class View {
      * @param   string  $file
      * @return  void
      */
-    public function render($file) {
+    public function render($file)
+    {
         if (file_exists($this->views.$file)) {
             include $this->views.$file;
         }
