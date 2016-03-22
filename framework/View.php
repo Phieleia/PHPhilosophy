@@ -62,4 +62,3 @@ class View {
         return $this->variables[$name];
     }
 }
-?>
