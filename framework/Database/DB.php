@@ -38,7 +38,6 @@ class DB {
     /**
      * @param   string      $sql
      * @param   array       $params
-     * @param   null|string $return
      * @return  void
      */
     public static function select($sql, array $params = null) {
@@ -58,7 +57,6 @@ class DB {
     /**
      * @param   string      $sql
      * @param   array       $params
-     * @param   null|string $return
      * @return  void
      */
     public static function update($sql, array $params = null) {
@@ -68,7 +66,6 @@ class DB {
     /**
      * @param   string      $sql
      * @param   array       $params
-     * @param   null|string $return
      * @return  void
      */
     public static function delete($sql, array $params = null) {
@@ -78,7 +75,6 @@ class DB {
     /**
      * @param   string      $sql
      * @param   array       $params
-     * @param   null|string $return
      * @return  void
      */
     private function cud($sql, array $params = null) {
