@@ -61,7 +61,7 @@ class Connection {
 		}
         
         // Execute statement and return
-        $stmt->execute;
+        $stmt->execute();
         return $stmt;
     }
     
