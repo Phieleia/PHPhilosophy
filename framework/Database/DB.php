@@ -31,7 +31,7 @@ class DB {
         
         if (!is_null(self::connection)) {
             $config = Config::get['database.' . $name];
-            self::connection = new Connection($config);
+            self::$connection = new Connection($config);
         }
     }
     
@@ -96,9 +96,9 @@ class DB {
     private function query($sql, array $params = null)
     {
         if (is_null($params)) {
-            return self::connection->query($sql);
+            return self::$connection->query($sql);
         }
-        return self::connection->preparedStmt($sql, $params);
+        return self::$connection->preparedStmt($sql, $params);
     }
     
     /**
@@ -106,13 +106,13 @@ class DB {
      * @return  int
      */
     private function execute($sql) {
-        return self::connection->execute($sql);
+        return self::$connection->execute($sql);
     }
     
     /**
      * @return  void
      */
     public static function disconnect() {
-        self::connection = null;
+        self::$connection = null;
     }
 }
