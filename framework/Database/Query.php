@@ -54,6 +54,8 @@ class Query {
         
         $wheres = (array) $wheres;
         $likes = (array) $likes;
+        
+        $params = [];
         $params = array_combine($wheres, $likes);
         
         return DB::select($sql, $params);
@@ -72,6 +74,8 @@ class Query {
         
         $columns = (array) $columns;
         $values = (array) $values;
+        
+        $params = [];
         $params = array_combine($columns, $values);
         
         return DB::insert($sql, $params);
@@ -92,6 +96,8 @@ class Query {
         
         $columns = (array) $columns;
         $values = (array) $values;
+        
+        $params = [];
         $params[] = array_combine($columns, $values);
         
         $wheres = (array) $wheres;
@@ -114,6 +120,8 @@ class Query {
         
         $wheres = (array) $wheres;
         $likes = (array) $likes;
+        
+        $params = [];
         $params = array_combine($wheres, $likes);
         
         return DB::delete($sql, $params);
