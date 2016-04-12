@@ -9,7 +9,7 @@ use Phphilosophy\Phphilosophy;
  * @copyright   2015-2016 Lisa Saalfrank
  */
 
-require __DIR__ . '/../bootstrap/bootstrap.php';
+require __DIR__.'/../bootstrap/bootstrap.php';
 
 $app = new Phphilosophy(); 
 

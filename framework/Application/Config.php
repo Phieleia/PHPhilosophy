@@ -17,7 +17,7 @@ class Config {
     /**
      * @var array
      */
-    private static $values = [ ];
+    private static $values = [];
     
     /**
      * @param   string  $key

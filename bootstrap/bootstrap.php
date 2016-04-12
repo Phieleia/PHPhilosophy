@@ -12,18 +12,18 @@ use Phphilosophy\Application\Config;
  */
 
 // Require the autoload and the config file
-require __DIR__ . '/../framework/Autoloader.php';
-require __DIR__ . '/../application/configs/application.php';
-require __DIR__ . '/../application/configs/database.php';
+require __DIR__.'/../framework/Autoloader.php';
+require __DIR__.'/../application/configs/application.php';
+require __DIR__.'/../application/configs/database.php';
 
 // create the autoload instance
 $autoload = new Autoloader();
 
 // Add namespace prefixes
-$autoload->addNamespace('Phphilosophy', __DIR__ . '/../framework/');
-$autoload->addNamespace($configs['app.name'] . '\\Model', __DIR__ . '/../application/models/');
-$autoload->addNamespace($configs['app.name'] . '\\Controller', __DIR__ . '/../application/controllers/');
-$autoload->addNamespace($configs['app.name'] . '\\Library', __DIR__ . '/../application/libraries/');
+$autoload->addNamespace('Phphilosophy', __DIR__.'/../framework/');
+$autoload->addNamespace($configs['app.name'].'\\Model', __DIR__.'/../application/models/');
+$autoload->addNamespace($configs['app.name'].'\\Controller', __DIR__.'/../application/controllers/');
+$autoload->addNamespace($configs['app.name'].'\\Library', __DIR__.'/../application/libraries/');
 
 // register the autoloader
 $autoload->register();

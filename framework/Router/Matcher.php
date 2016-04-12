@@ -49,7 +49,7 @@ class Matcher {
     private function translate($token, $pattern)
     {
         // Searches the route pattern for placeholders like {id:num}
-        $search = '#[\{][a-z0-9]+' . $token . '[\}]#';
+        $search = '#[\{][a-z0-9]+'.$token.'[\}]#';
         
         // The regular expression to be exchanged with the token name
         $replacement = $this->tokens[$token];
@@ -78,7 +78,7 @@ class Matcher {
         }
         
         // The parsed regular expression ready for matching
-        return '#^' . $pattern . '$#D';
+        return '#^'.$pattern.'$#D';
     }
     
     /**
@@ -94,7 +94,7 @@ class Matcher {
         $methods = $route->getMethods();
         
         // The current uri
-        $uri = '/' . trim($this->request->getRequestTarget(), '/');
+        $uri = '/'.trim($this->request->getRequestTarget(), '/');
         
         // The current http method
         $method = $this->request->getMethod();

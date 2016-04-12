@@ -59,8 +59,8 @@ class Connection {
         $elements = count($names);
         
         for ($i = 0; $i < $elements; $i++) {
-			$stmt->bindParam(':' . $names[$i], $params[$names[$i]]);
-		}
+            $stmt->bindParam(':' . $names[$i], $params[$names[$i]]);
+        }
         
         // Execute statement and return
         $stmt->execute();
