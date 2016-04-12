@@ -1,21 +1,23 @@
 <?php
 
-namespace Wildcat\Database;
+namespace Phphilosophy\Database;
 
-use Wildcat\App\Config;
+use Phphilosophy\Application\Config;
 
 /**
+ * Phphilosophy Database access class
+ *
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2016 Lisa Saalfrank
+ * @copyright   2015-2016 Lisa Saalfrank
+ * @license	http://opensource.org/licenses/MIT MIT License
  * @since       0.1.0
  * @version     0.1.0
- * @package     Wildcat
- * @subpackage  Database
+ * @package     Phphilosophy
  */
 class DB {
     
     /**
-     * @var \Wildcat\Database\Connection
+     * @var \Phphilosophy\Database\Connection
      */
     private static $connection;
     

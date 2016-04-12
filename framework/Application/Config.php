@@ -3,7 +3,7 @@
 namespace Phphilosophy\Application;
 
 /**
- * Phphilosophy configuration container
+ * Phphilosophy Configuration container
  *
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
  * @copyright   2015-2016 Lisa Saalfrank
@@ -11,29 +11,47 @@ namespace Phphilosophy\Application;
  * @since       0.1.0
  * @version     0.1.0
  * @package     Phphilosophy
- * @subpackage  Application
  */
 class Config {
     
     /**
-     * @var     array   Array with configuration values
+     * @var array
      */
-    private static $config = [];
+    private static $values = [ ];
     
     /**
-     * @param   string  $key    The configuration name
-     * @param   mixed   $value  The configuration item
+     * @param   string  $key
+     * @param   mixed   $value
+     *
      * @return  void
      */
     public static function set($key, $value) {
-        self::$config[$key] = $value;
+        self::$values[$key] = $value;
     }
     
     /**
-     * @param   string  $key    The configuration name
-     * @return  mixed   The configuration value
+     * @param   string  $key
+     * @param   mixed   $default
+     *
+     * @return  mixed
      */
-    public static function get($key) {
-        self::$config[$key];
+    public static function get($key, $default = null)
+    {
+        if (self::has($key)) {
+            return self::$values[$key];
+        }
+        
+        if (!is_null($default)) {
+            return $default;
+        }
+    }
+    
+    /**
+     * @param   string  $key
+     *
+     * @return  boolean
+     */
+    public static function has($key) {
+        return array_key_exists($key, self::$values);
     }
 }
