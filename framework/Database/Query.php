@@ -47,12 +47,15 @@ class Query {
     * @param $likes array|string
     * @return array
     */
-    public function selectWhere($columns, $table, $wheres, $operators, $likes) {
+    public function selectWhere($columns, $table, $wheres, $operators, $likes)
+    {
         // Prepare the statement
         $sql = $this->sql->selectWhere($columns, $table, $wheres, $operators);
+        
         $wheres = (array) $wheres;
         $likes = (array) $likes;
         $params = array_combine($wheres, $likes);
+        
         return DB::select($sql, $params);
     }
     
@@ -62,10 +65,15 @@ class Query {
     * @param string|array $columns
     * @param string|array $values
     */
-    public function insert($table, $columns, $values) {
+    public function insert($table, $columns, $values)
+    {
         // Prepare the SQL statement
         $sql = $this->sql->insert($table, $columns);
+        
+        $columns = (array) $columns;
+        $values = (array) $values;
         $params = array_combine($columns, $values);
+        
         return DB::insert($sql, $params);
     }
     
@@ -78,10 +86,18 @@ class Query {
     * @param array|string $operators
     * @param string|array $likes
     */
-    public function update($table, $columns, $values, $wheres, $operators, $likes) {
+    public function update($table, $columns, $values, $wheres, $operators, $likes)
+    {
         $sql = $this->sql->update($table, $columns, $wheres, $operators);
+        
+        $columns = (array) $columns;
+        $values = (array) $values;
         $params[] = array_combine($columns, $values);
+        
+        $wheres = (array) $wheres;
+        $likes = (array) $likes;
         $params[] = array_combine($wheres, $likes);
+        
         return DB::update($sql, $params);
     }
     
@@ -92,9 +108,14 @@ class Query {
     * @param array|string $operators
     * @param array|string $likes
     */
-    public function delete($table, $wheres, $operators, $likes) {
+    public function delete($table, $wheres, $operators, $likes)
+    {
         $sql = $this->sql->delete($table, $wheres, $operators);
+        
+        $wheres = (array) $wheres;
+        $likes = (array) $likes;
         $params = array_combine($wheres, $likes);
+        
         return DB::delete($sql, $params);
     }
 }
