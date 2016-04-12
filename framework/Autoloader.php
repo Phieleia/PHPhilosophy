@@ -39,8 +39,8 @@ class Autoloader {
      */
     public function addNamespace($prefix, $path)
     {
-        $prefix = trim($prefix, '\\') . '\\';
-        $this->prefixes[$prefix] = rtrim($path, '/') . '/';
+        $prefix = trim($prefix, '\\').'\\';
+        $this->prefixes[$prefix] = rtrim($path, '/').'/';
     }
     
     /**
@@ -75,7 +75,7 @@ class Autoloader {
         $path = $this->prefixes[$prefix];
         $class = substr($class, strlen($prefix));
         
-        $file = $path . str_replace('\\', '/', $class) . '.php';
+        $file = $path.str_replace('\\', '/', $class).'.php';
         
         return $this->requireFile($file);
     }

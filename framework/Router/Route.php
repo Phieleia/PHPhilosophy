@@ -49,7 +49,7 @@ class Route {
      * @return  void
      */
     public function setPattern($pattern) {
-        $this->pattern = '/' . trim($pattern, '/');
+        $this->pattern = '/'.trim($pattern, '/');
     }
     
     /**
@@ -90,8 +90,8 @@ class Route {
     private function createCallable($controller, $method)
     {
         // The namespace to be used with controllers
-        $namespace = '\\' . Config::get('app.name') . '\\Controller\\';
-        $controller = $namespace . $controller;
+        $namespace = '\\'.Config::get('app.name').'\\Controller\\';
+        $controller = $namespace.$controller;
         
         // Create new anonymous function which calls controller -> method
         $callable = function() use ($controller, $method) {
