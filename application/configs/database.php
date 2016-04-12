@@ -12,7 +12,7 @@ $database = [
     /* 
      * PLEASE CHANGE THESE VALUES ACCORDINGLY!
      */
-    'dafault' => [
+    'default' => [
 
         // The driver of your database
         'driver' => 'mysql',

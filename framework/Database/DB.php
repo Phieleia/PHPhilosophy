@@ -31,7 +31,7 @@ class DB {
             $name = 'default';
         }
         
-        if (!is_null(self::$connection)) {
+        if (is_null(self::$connection)) {
             $config = Config::get('database');
             self::$connection = new Connection($config[$name]);
         }
