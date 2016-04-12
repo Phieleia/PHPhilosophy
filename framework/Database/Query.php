@@ -22,31 +22,31 @@ class Query {
     /**
      * @param   string  $name
      */
-    public function __construct($name = null) {
+    public function __construct($name = null)
+    {
         $this->sql = new SQL();
         DB::connect($name);
     }
     
     /**
-     * @access public
-     * @param $columns array|string
-     * @param $table string
-     * @return array
+     * @param   array|string    $columns
+     * @param   string          $table
+     * @return  array
      */
-    public function select($columns, $table) {
+    public function select($columns, $table)
+    {
         $sql = $this->sql->select($columns, $table);
         return DB::select($sql);
     }
     
     /**
-    * @access public
-    * @param $columns array|string
-    * @param $table string
-    * @param $wheres array|string
-    * @param array|string $operators
-    * @param $likes array|string
-    * @return array
-    */
+     * @param   array|string    $columns
+     * @param   string          $table
+     * @param   array|string    $wheres
+     * @param   array|string    $operators
+     * @param   array|string    $likes
+     * @return  array
+     */
     public function selectWhere($columns, $table, $wheres, $operators, $likes)
     {
         // Prepare the statement
@@ -62,11 +62,10 @@ class Query {
     }
     
     /**
-    * @access public
-    * @param string $table
-    * @param string|array $columns
-    * @param string|array $values
-    */
+     * @param   string          $table
+     * @param   string|array    $columns
+     * @param   string|array    $values
+     */
     public function insert($table, $columns, $values)
     {
         // Prepare the SQL statement
@@ -82,7 +81,6 @@ class Query {
     }
     
     /**
-    * @access public
     * @param string $table
     * @param string|array $columns
     * @param string|array $values

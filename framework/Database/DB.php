@@ -42,7 +42,8 @@ class DB {
      * @param   array       $params
      * @return  void
      */
-    public static function select($sql, array $params = null) {
+    public static function select($sql, array $params = null)
+    {
         $result = self::query($sql, $params);
         return $result->fetchAll(\PDO::FETCH_CLASS, 'stdClass');
     }
@@ -79,7 +80,8 @@ class DB {
      * @param   array       $params
      * @return  void
      */
-    private function cud($sql, array $params = null) {
+    private function cud($sql, array $params = null)
+    {
         if (is_null($params)) {
             return $this->execute($sql);
         }
