@@ -15,6 +15,11 @@ namespace Phphilosophy\Database;
 class Query {
     
     /**
+     * @var \Phphilosophy\Database\SQL
+     */
+    private $sql;
+    
+    /**
      * @param   string  $name
      */
     public function __construct($name = null) {
@@ -45,6 +50,8 @@ class Query {
     public function selectWhere($columns, $table, $wheres, $operators, $likes) {
         // Prepare the statement
         $sql = $this->sql->selectWhere($columns, $table, $wheres, $operators);
+        $wheres = (array) $wheres;
+        $likes = (array) $likes;
         $params = array_combine($wheres, $likes);
         return DB::select($sql, $params);
     }
