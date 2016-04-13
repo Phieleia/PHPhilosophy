@@ -274,7 +274,7 @@ class SQL {
                 if ($i == 0) {
                     $snippet = $this->where.$this->addBackticks($columns[$i]);
                     $snippet = $snippet.' '.$operators[$i].' '.$this->createPlaceholder($columns[$i]);
-                } else  {
+                } else {
                     $snippet = $snippet.$this->and.$this->addBackticks($columns[$i]);
                     $snippet = $snippet.' '.$operators[$i].' '.$this->createPlaceholder($columns[$i]);
                 }
