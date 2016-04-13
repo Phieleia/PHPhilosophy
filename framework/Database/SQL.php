@@ -225,9 +225,17 @@ class SQL {
                 
                 // First element
                 if ($i == 0) {
+<<<<<<< HEAD
                     $snippet = 'WHERE '.$cleanColumns[$i];
                 } else  {
                     $snippet = $snippet.$this->and.$cleanColumns[$i];
+=======
+                    $snippet = $this->where.$this->addBackticks($columns[$i]);
+                    $snippet = $snippet.' '.$operators[$i].' '.$this->createPlaceholder($columns[$i]);
+                } else {
+                    $snippet = $snippet.$this->and.$this->addBackticks($columns[$i]);
+                    $snippet = $snippet.' '.$operators[$i].' '.$this->createPlaceholder($columns[$i]);
+>>>>>>> origin/master
                 }
                 $snippet = $snippet.' '.$operators[$i].' '.$this->createPlaceholder($columns[$i]);
             }
