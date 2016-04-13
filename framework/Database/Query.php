@@ -31,7 +31,6 @@ class Query {
     /**
      * @param   array|string    $columns
      * @param   string          $table
-     * @return  array
      */
     public function select($columns, $table)
     {
@@ -45,13 +44,12 @@ class Query {
      * @param   array|string    $wheres
      * @param   array|string    $operators
      * @param   array|string    $likes
-     * @return  array
      */
     public function selectWhere($columns, $table, $wheres, $operators, $likes)
     {
         // Prepare the statement
         $sql = $this->sql->selectWhere($columns, $table, $wheres, $operators);
-        $params = $this->mergeParams($wheres, $likes, 'w');
+        $params = $this->mergeParams($wheres, $likes);
         
         return DB::select($sql, $params);
     }
@@ -71,35 +69,34 @@ class Query {
     }
     
     /**
-    * @param string $table
-    * @param string|array $columns
-    * @param string|array $values
-    * @param string|array $wheres
-    * @param array|string $operators
-    * @param string|array $likes
-    */
+     * @param    string          $table
+     * @param    string|array    $columns
+     * @param    string|array    $values
+     * @param    string|array    $wheres
+     * @param    array|string    $operators
+     * @param    string|array    $likes
+     */
     public function update($table, $columns, $values, $wheres, $operators, $likes)
     {
         $sql = $this->sql->update($table, $columns, $wheres, $operators);
 
         $params = [];
         $params[] = $this->mergeParams($columns, $values, 'c');
-        $params[] = $this->mergeParams($wheres, $likes, 'w');
+        $params[] = $this->mergeParams($wheres, $likes);
         
         return DB::update($sql, $params);
     }
     
     /**
-    * @access public
-    * @param string $table
-    * @param array|string $wheres
-    * @param array|string $operators
-    * @param array|string $likes
-    */
+     * @param   string          $table
+     * @param   array|string    $wheres
+     * @param   array|string    $operators
+     * @param   array|string    $likes
+     */
     public function delete($table, $wheres, $operators, $likes)
     {
         $sql = $this->sql->delete($table, $wheres, $operators);
-        $params = $this->mergeParams($wheres, $likes, 'w');
+        $params = $this->mergeParams($wheres, $likes);
         
         return DB::delete($sql, $params);
     }
