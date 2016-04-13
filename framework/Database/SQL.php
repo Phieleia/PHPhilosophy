@@ -232,17 +232,14 @@
         */
         public function equalPlaceholder($values)
         {
-            if (is_array($values)) {
-				
+            if (is_array($values))
+            {
                 $elements = count($values);
                 $count = $elements + 1;
+                $snippet = '';
 				
                 for ($i = 0; $i < $count; $i++) {
-                    
-                    if ($i == 0 && $i !== $elements) {
-                        $snippet = $this->addBackticks($values[$i]).$this->equals;
-                        $snippet = $snippet.$this->createPlaceholder($values[$i]).$this->comma;
-                    } elseif ($i > 0 && $i < $elements - 1 && $i !== $elements) {
+                    if ($i >= 0 && $i < $elements - 1 && $i !== $elements) {
                         $snippet = $snippet.$this->addBackticks($values[$i]).$this->equals;
                         $snippet = $snippet.$this->createPlaceholder($values[$i]).$this->comma;
                     } else {
@@ -403,20 +400,12 @@
 		public function insert($table, $columns) {
 			
 			$snippet = $this->insert.$this->addBackticks($table).' ';
-			
-			// if many column names shall be inserted
-			if (is_array($columns)) {
-				$snippet = $snippet.$this->addBrackets($this->addCommas($this->arrayBackticks($columns)));
-			} else {
-				$snippet = $snippet.$this->addBrackets($this->addBackticks($columns));
-			}
-			
-			// add value keyword
-			$snippet = $snippet.$this->values;
-			
+
 			// Add the same number of placeholders
-			if (is_array($columns)) {
-				
+			if (is_array($columns))
+            {
+                $snippet = $snippet.$this->addBrackets($this->addCommas($this->arrayBackticks($columns)));
+                $snippet = $snippet.$this->values;
                 // Number of columns
                 $elements = count($columns);
 				
@@ -433,6 +422,9 @@
 				// closes brackets
 				return $snippet.')';
 			}
+            
+            $snippet = $snippet.$this->values;
+            $snippet = $snippet.$this->addBrackets($this->addBackticks($columns));
             return $snippet.$this->createPlaceholder($columns);
 		}
 	}
