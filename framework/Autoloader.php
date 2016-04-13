@@ -3,7 +3,7 @@
 namespace Phphilosophy;
 
 /**
- * Autoloader
+ * PSR-4 Autoloader
  *
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
  * @copyright   2016 Lisa Saalfrank
@@ -47,6 +47,7 @@ class Autoloader {
      * Load class from the file path
      *
      * @param   string  $class
+     *
      * @return  boolean
      */
     private function loadClass($class)
@@ -68,6 +69,7 @@ class Autoloader {
      *
      * @param   string  $prefix
      * @param   string  $class
+     *
      * @return  boolean
      */
     private function loadMappedFile($prefix, $class)
@@ -84,6 +86,7 @@ class Autoloader {
      * If the given file exists, require it from the file system
      *
      * @param   string  $file
+     *
      * @return  void
      */
     private function requireFile($file)

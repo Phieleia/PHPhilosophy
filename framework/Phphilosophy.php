@@ -35,6 +35,7 @@ class Phphilosophy {
     /**
      * @param   string          $pattern
      * @param   mixed           $action
+     *
      * @return  void
      */
     public function get($pattern, $action) {
@@ -44,6 +45,7 @@ class Phphilosophy {
     /**
      * @param   string          $pattern
      * @param   mixed           $action
+     *
      * @return  void
      */
     public function post($pattern, $action) {
@@ -53,6 +55,7 @@ class Phphilosophy {
     /**
      * @param   string          $pattern
      * @param   mixed           $action
+     *
      * @return  void
      */
     public function put($pattern, $action) {
@@ -62,6 +65,7 @@ class Phphilosophy {
     /**
      * @param   string          $pattern
      * @param   mixed           $action
+     *
      * @return  void
      */
     public function patch($pattern, $action) {
@@ -71,6 +75,7 @@ class Phphilosophy {
     /**
      * @param   string          $pattern
      * @param   mixed           $action
+     *
      * @return  void
      */
     public function delete($pattern, $action) {
@@ -80,6 +85,7 @@ class Phphilosophy {
     /**
      * @param   string          $pattern
      * @param   mixed           $action
+     *
      * @return  void
      */
     public function any($pattern, $action)
@@ -92,6 +98,7 @@ class Phphilosophy {
      * @param   array           $methods
      * @param   string          $pattern
      * @param   mixed           $action
+     *
      * @return  void
      */
     public function add($methods, $pattern, $action) {
@@ -102,6 +109,7 @@ class Phphilosophy {
      * @param   string          $pattern    The route pattern
      * @param   mixed           $action     The route action
      * @param   array|string    $methods    The route method(s)
+     *
      * @retun   void
      */
     private function addRoute($pattern, $action, $methods)
@@ -112,6 +120,7 @@ class Phphilosophy {
 
     /**
      * @param   mixed   $action     The fallback callable
+     *
      * @return  void
      */
     public function notFound($action) {
