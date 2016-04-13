@@ -3,39 +3,6 @@
 namespace Phphilosophy\Database;
 
 /**
-* A class which builds SQL statements for building queries.
-* It will utilize named prepared statements only to reduze 
-* the amount of vulnerabilities and it will be combined with
-* and is built for PHPs PDO. It will be used in PHPhilosophy's 
-* Query class for executing database requests in one line of code.
-*
-* === EXAMPLE USAGE ===
-* -----------------------------------------------------------------
-* <?php
-* use PHPhilosophy\Database\SQL;
-* 
-* $sql = new SQL();
-*
-* // SELECT * FROM `users`
-* $userdata = $sql->select('*', 'users');
-* // SELECT `id` FROM `users`
-* $user_ids = $sql->select('id', 'users');
-* // SELECT `id`, `username` FROM `users`
-* $users = $sql->select(['id', 'username'], 'users'); 
-* // SELECT * FROM `users` WHERE `id` LIKE :id
-* $users = $sql->selectWhere('*', 'users', 'id', 'LIKE');
-*
-* // UPDATE `users` SET `username` = :username, `email` = :email WHERE `id` LIKE :id
-* $users = $sql->update('users', ['username', 'email'], 'id', 'LIKE');
-* 
-* // DELETE FROM `users` WHERE `id` LIKE :id AND `username` LIKE :username
-* $sql->delete('users', ['id', 'username'], ['LIKE', 'LIKE']);
-*
-* // INSERT INTO `users` (`id`, `username`, `password`, `email`, `status`) VALUES (:id, :username, :password, :email, :status)
-* $sql->insert('users', ['id', 'username', 'password', 'email', 'status']);
-* ?>
-* -----------------------------------------------------------------
-* 
 * @author Pandoria <info@hippodora.de>
 * @copyright 2015 Pandoria
 * @version 0.1.0
@@ -45,106 +12,89 @@ namespace Phphilosophy\Database;
 class SQL {
 
     /**
-    * ------------------------------
-    * === SQL LANGUAGE FRAGMENTS ===
-    * ------------------------------
-    */
-    
-    /**
-    * @access private
-    * @var string
-    */
+     * @var string
+     */
     private $insert = 'INSERT INTO ';
     
     /**
-    * @access private
-    * @var string
-    */
+     * @var string
+     */
     private $select = 'SELECT ';
     
     /**
-    * @access private
-    * @var $string
-    */
+     * @var string
+     */
     private $update = 'UPDATE ';
     
     /**
-    * @access private
-    * @var $string
-    */
+     * @var $string
+     */
     private $delete = 'DELETE FROM ';
     
     /**
-    * @access private
-    * @var string
-    */
+     * @var string
+     */
     private $set = ' SET ';
     
     /**
-    * @access private
-    * @var string
-    */
+     * @access private
+     * @var string
+     */
     private $where = 'WHERE ';
     
     /**
-    * @access private
-    * @var string
-    */
+     * @access private
+     * @var string
+     */
     private $equals = ' = ';
     
     /**
-    * @access private
-    * @var string
-    */
+     * @access private
+     * @var string
+     */
     private $values = ' VALUES ';
     
     /**
-    * @access private
-    * @var string
-    */
+     * @access private
+     * @var string
+     */
     private $left_bracket = '(';
     
     /**
-    * @access private
-    * @var string
-    */
+     * @access private
+     * @var string
+     */
     private $right_bracket = ')';
 
     /**
-    * @access private
-    * @var string
-    */
+     * @access private
+     * @var string
+     */
     private $from = ' FROM ';
     
     /**
-    * @access private
-    * @var string
-    */
+     * @access private
+     * @var string
+     */
     private $and = ' AND ';
     
     /**
-    * @access private
-    * @var string
-    */
+     * @access private
+     * @var string
+     */
     private $comma = ', ';
     
     /**
-    * @access private
-    * @var string
-    */
+     * @access private
+     * @var string
+     */
     private $all = '*';
     
     /**
-    * @access private
-    * @var string
-    */
+     * @access private
+     * @var string
+     */
     private $backtick = '`';
-    
-    /**
-    * ----------------------------
-    * === SQL SHORTCUT METHODS ===
-    * ----------------------------
-    */
     
     /**
     * Check: OK
@@ -154,7 +104,8 @@ class SQL {
     * @param string $value
     * @return string
     */
-    public function addBackticks($value) {
+    public function addBackticks($value)
+    {
         $snippet = $this->backtick.$value.$this->backtick;
         return $snippet;
     }
@@ -210,7 +161,7 @@ class SQL {
     * @return string
     */
     public function addBrackets($value) {
-        return $this->left_bracket.$value.$this->right_bracket;
+        return '('.$value.')';
     }
     
     /**
@@ -220,7 +171,8 @@ class SQL {
     * @param string $fieldname
     * @return string
     */
-    public function createPlaceholder($fieldname) {
+    public function createPlaceholder($fieldname)
+    {
         $placeholder = ':'.$fieldname;
         return $placeholder;
     }
@@ -240,16 +192,16 @@ class SQL {
             
             for ($i = 0; $i < $count; $i++) {
                 if ($i >= 0 && $i < $elements - 1 && $i !== $elements) {
-                    $snippet = $snippet.$this->addBackticks($values[$i]).$this->equals;
-                    $snippet = $snippet.$this->createPlaceholder($values[$i]).$this->comma;
+                    $snippet = $snippet.$this->addBackticks($values[$i]).' = ';
+                    $snippet = $snippet.$this->createPlaceholder($values[$i]).', ';
                 } else {
                     $snippet = $snippet.$this->addBackticks($values[$elements - 1]);
-                    $snippet = $snippet.$this->equals.$this->createPlaceholder($values[$elements - 1]);
+                    $snippet = $snippet.' = '.$this->createPlaceholder($values[$elements - 1]);
                 }
             }
             return $snippet;
         }
-        return $this->addBackticks($values).$this->equals.$this->createPlaceholder($values);
+        return $this->addBackticks($values).' = '.$this->createPlaceholder($values);
     }
     
     /**
@@ -265,6 +217,7 @@ class SQL {
         if (is_array($columns))
         {
             // Number of columns
+            $cleanColumns = $this->arrayBackticks($columns);
             $elements = count($columns);
             $snippet = '';
             
@@ -272,12 +225,11 @@ class SQL {
                 
                 // First element
                 if ($i == 0) {
-                    $snippet = $this->where.$this->addBackticks($columns[$i]);
-                    $snippet = $snippet.' '.$operators[$i].' '.$this->createPlaceholder($columns[$i]);
+                    $snippet = 'WHERE '.$cleanColumns[$i];
                 } else  {
-                    $snippet = $snippet.$this->and.$this->addBackticks($columns[$i]);
-                    $snippet = $snippet.' '.$operators[$i].' '.$this->createPlaceholder($columns[$i]);
+                    $snippet = $snippet.$this->and.$cleanColumns[$i];
                 }
+                $snippet = $snippet.' '.$operators[$i].' '.$this->createPlaceholder($columns[$i]);
             }
             
             return $snippet;
@@ -300,7 +252,8 @@ class SQL {
     * @param string $table
     * @return string
     */
-    public function selectOne($column, $table) {
+    public function selectOne($column, $table)
+    {
         $snippet = $this->select.$this->addBackticks($column);
         $snippet = $snippet.$this->from.$this->addBackticks($table);
         return $snippet;
@@ -313,7 +266,8 @@ class SQL {
     * @param string $table
     * @return string
     */
-    public function selectAll($table) {
+    public function selectAll($table)
+    {
         $snippet = $this->select.$this->all.$this->from.$this->addBackticks($table);
         return $snippet;
     }
@@ -326,7 +280,8 @@ class SQL {
     * @param string $table
     * @return string
     */
-    public function selectMany(array $columns, $table) {
+    public function selectMany(array $columns, $table)
+    {
         $clean_columns = $this->arrayBackticks($columns);
         $snippet = $this->select.$this->addCommas($clean_columns).$this->from.$this->addBackticks($table);
         return $snippet;
@@ -374,7 +329,8 @@ class SQL {
     * @param array|string $operators
     * @return string
     */
-    public function update($table, $columns, $wheres, $operators) {
+    public function update($table, $columns, $wheres, $operators)
+    {
         $snippet = $this->update.$this->addBackticks($table).$this->set.$this->equalPlaceholder($columns);
         $snippet = $snippet.' '.$this->addWhere($wheres, $operators);
         return $snippet;
@@ -397,8 +353,8 @@ class SQL {
     * @param string $table
     * @param array|string $columns
     */
-    public function insert($table, $columns) {
-        
+    public function insert($table, $columns)
+    {
         $snippet = $this->insert.$this->addBackticks($table).' ';
 
         // Add the same number of placeholders
