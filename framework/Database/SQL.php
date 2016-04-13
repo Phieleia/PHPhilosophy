@@ -184,21 +184,18 @@
         * @param array $values
         * @return string
         */
-        public function addCommas(array $values) {
+        public function addCommas(array $values)
+        {
             $elements = count($values);
             $count = $elements + 1;
 			
-            for ($i = 0; $i < $count; $i++) {
-				
+            for ($i = 0; $i < $count; $i++)
+            {
                 if ($i == 0 && $i !== $elements) {
                     $snippet = $values[$i].$this->comma;
-                } 
-				
-                if ($i > 0 && $i < $elements - 1 && $i !== $elements) {
+                } elseif ($i > 0 && $i < $elements - 1 && $i !== $elements) {
                     $snippet = $snippet.$values[$i].$this->comma;
-                }
-				
-                if ($i == $elements) {
+                } else {
                     $snippet = $snippet.$values[$elements - 1];
                 }
             }
@@ -245,14 +242,10 @@
                     if ($i == 0 && $i !== $elements) {
                         $snippet = $this->addBackticks($values[$i]).$this->equals;
                         $snippet = $snippet.$this->createPlaceholder($values[$i]).$this->comma;
-                    } 
-					
-                    if ($i > 0 && $i < $elements - 1 && $i !== $elements) {
+                    } elseif ($i > 0 && $i < $elements - 1 && $i !== $elements) {
                         $snippet = $snippet.$this->addBackticks($values[$i]).$this->equals;
                         $snippet = $snippet.$this->createPlaceholder($values[$i]).$this->comma;
-                    }
-					
-                    if ($i == $elements) {
+                    } else {
                         $snippet = $snippet.$this->addBackticks($values[$elements - 1]);
                         $snippet = $snippet.$this->equals.$this->createPlaceholder($values[$elements - 1]);
                     }
@@ -349,24 +342,18 @@
         * @param $table string
         * @return string
         */
-        public function select($columns, $table) {
-			
-            // Many columns
-            if (is_array($columns)) {
-                return $this->selectMany($columns, $table);
-            }
-			
+        public function select($columns, $table)
+        {
             // All or one column
-            if (is_array($columns) === false) {
-				
+            if (!is_array($columns)) {
                 // All columns
                 if ($columns == '*') {
                     return $this->selectAll($table);
                 }
-				
                 // One column
                 return $this->selectOne($columns, $table);
             }
+            return $this->selectMany($columns, $table);
         }
 		
         /**
@@ -444,14 +431,8 @@
                 }
 				
 				// closes brackets
-				$snippet = $snippet.')';
+				return $snippet.')';
 			}
-
-			// if just one element simple add (?)
-			if (is_array($columns) === false) {
-				$snippet = $snippet.$this->createPlaceholder($columns);
-			}
-			
-			return $snippet;
+            return $snippet.$this->createPlaceholder($columns);
 		}
 	}
