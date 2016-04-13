@@ -83,9 +83,9 @@ class DB {
     private function cud($sql, array $params = null)
     {
         if (is_null($params)) {
-            return $this->execute($sql);
+            return self::execute($sql);
         }
-        return $this->query($sql, $params)->rowCount();
+        return self::query($sql, $params)->rowCount();
     }
     
     /**
