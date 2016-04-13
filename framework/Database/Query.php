@@ -54,6 +54,7 @@ class Query {
         
         $wheres = (array) $wheres;
         $likes = (array) $likes;
+        $wheres = $this->sql->arrayPlaceholders($wheres);
         
         $params = [];
         $params = array_combine($wheres, $likes);

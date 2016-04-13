@@ -130,8 +130,44 @@ class SQL {
     * @param string $fieldname
     * @return string
     */
-    public function createPlaceholder($fieldname) {
-        return ':'.$fieldname;
+    public function createPlaceholder($fieldname, $number) {
+        return ':'.$fieldname.'_'.$number;
+    }
+    
+    /**
+     * @param   array   $fields
+     *
+     * @return  array
+     */
+    public function arrayPlaceholders($fields, $suffix = 'w')
+    {
+        $elements = count($fields);
+        
+        for ($i = 0; $i < $elements; $i++) {
+            $fields[$i] = $this->createPlaceholder($fields[$i], $i).$suffix;
+        }
+        
+        return $fields;
+    }
+    
+    /**
+     * @param   string  $is
+     * @param   string  $like
+     *
+     * @return  string
+     */
+    private function createEquals($is, $like) {
+        $id.' = '.$like;
+    }
+    
+    /**
+     * @param   array   $is
+     * @param   array   $like
+     *
+     * @return  array
+     */
+    public function arrayEquals(array $is, array $like) {
+        return array_map([$this, 'createEquals'], $is, $like);
     }
     
     /**
@@ -139,7 +175,7 @@ class SQL {
     * @param string $values
     * @return string
     */
-    public function equalPlaceholder($values)
+    public function equalPlaceholder($values, $suffix = 'w')
     {
         if (is_array($values))
         {
@@ -150,15 +186,15 @@ class SQL {
             for ($i = 0; $i < $count; $i++) {
                 if ($i >= 0 && $i < $elements - 1 && $i !== $elements) {
                     $snippet = $snippet.$this->addBackticks($values[$i]).' = ';
-                    $snippet = $snippet.$this->createPlaceholder($values[$i]).', ';
+                    $snippet = $snippet.$this->createPlaceholder($values[$i], $i).$suffix.', ';
                 } else {
                     $snippet = $snippet.$this->addBackticks($values[$elements - 1]);
-                    $snippet = $snippet.' = '.$this->createPlaceholder($values[$elements - 1]);
+                    $snippet = $snippet.' = '.$this->createPlaceholder($values[$elements - 1], $i).$suffix;
                 }
             }
             return $snippet;
         }
-        return $this->addBackticks($values).' = '.$this->createPlaceholder($values);
+        return $this->addBackticks($values).' = '.$this->createPlaceholder($values, 0).$suffix;
     }
     
     /**
@@ -186,13 +222,12 @@ class SQL {
                 } else  {
                     $snippet = $snippet.$this->and.$cleanColumns[$i];
                 }
-                $snippet = $snippet.' '.$operators[$i].' '.$this->createPlaceholder($columns[$i]);
+                $snippet = $snippet.' '.$operators[$i].' '.$this->createPlaceholder($columns[$i], $i).'w';
             }
-            
             return $snippet;
         }
         
-        return $this->where.$this->addBackticks($columns).' '.$operators.' '.$this->createPlaceholder($columns);
+        return $this->where.$this->addBackticks($columns).' '.$operators.' '.$this->createPlaceholder($columns, 0).'w';
     }
     
     /**
@@ -288,7 +323,7 @@ class SQL {
     */
     public function update($table, $columns, $wheres, $operators)
     {
-        $snippet = $this->update.$this->addBackticks($table).$this->set.$this->equalPlaceholder($columns);
+        $snippet = $this->update.$this->addBackticks($table).$this->set.$this->equalPlaceholder($columns, 'c');
         $snippet = $snippet.' '.$this->addWhere($wheres, $operators);
         return $snippet;
     }
@@ -326,9 +361,9 @@ class SQL {
                 
                 // First element opens the brackets
                 if ($i === 0) {
-                    $snippet = $snippet.'('.$this->createPlaceholder($columns[$i]);
+                    $snippet = $snippet.'('.$this->createPlaceholder($columns[$i], $i).'c';
                 } else {
-                    $snippet = $snippet.$this->comma.$this->createPlaceholder($columns[$i]);
+                    $snippet = $snippet.$this->comma.$this->createPlaceholder($columns[$i], $i).'c';
                 }
             }
             
@@ -338,6 +373,6 @@ class SQL {
         
         $snippet = $snippet.$this->values;
         $snippet = $snippet.$this->addBrackets($this->addBackticks($columns));
-        return $snippet.$this->createPlaceholder($columns);
+        return $snippet.$this->createPlaceholder($columns, 0).'c';
     }
 }
