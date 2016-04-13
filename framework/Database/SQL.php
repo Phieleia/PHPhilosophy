@@ -86,10 +86,8 @@ class SQL {
     * @param string $value
     * @return string
     */
-    public function addBackticks($value)
-    {
-        $snippet = $this->backtick.$value.$this->backtick;
-        return $snippet;
+    public function addBackticks($value) {
+        return $this->backtick.$value.$this->backtick;
     }
     
     /**
@@ -99,15 +97,8 @@ class SQL {
     * @param array $values
     * @return array
     */
-    public function arrayBackticks(array $values = [])
-    {
-        $elements = count($values);
-        $array = [];
-        
-        for ($i = 0; $i < $elements; $i++) {
-            $array[$i] = $this->addBackticks($values[$i]);
-        }
-        return $array;
+    public function arrayBackticks(array $values) {
+        return array_map([$this, 'addBackticks'], $values);
     }
     
     /**
@@ -119,17 +110,7 @@ class SQL {
     */
     public function addCommas(array $values)
     {
-        $elements = count($values);
-        $count = $elements + 1;
-        $snippet = '';
-        
-        for ($i = 0; $i < $count; $i++)
-        {
-            if ($i < $elements - 1 && $i !== $elements) {
-                $snippet = $snippet.$values[$i].', ';
-            }
-        }
-        return $snippet.$values[$elements - 1];;
+        return implode(', ', $array);
     }
     
     /**
