@@ -166,8 +166,11 @@
         * @param array $values
         * @return array
         */
-        public function arrayBackticks(array $values = []) {
+        public function arrayBackticks(array $values = [])
+        {
             $elements = count($values);
+            $array = [];
+            
             for ($i = 0; $i < $elements; $i++) {
                 $array[$i] = $this->addBackticks($values[$i]);
             }
