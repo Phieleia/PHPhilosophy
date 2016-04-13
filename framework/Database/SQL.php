@@ -438,7 +438,7 @@
                     // First element opens the brackets
                     if ($i === 0) {
                         $snippet = $snippet.'('.$this->createPlaceholder($columns[$i]);
-                    } else ($i !== 0) {
+                    } else {
                         $snippet = $snippet.$this->comma.$this->createPlaceholder($columns[$i]);
                     }
                 }
