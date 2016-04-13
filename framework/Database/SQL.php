@@ -130,7 +130,7 @@ class SQL {
     
     /**
     * Check: OK
-    * Chains all elemts of an array and seperates them with commas
+    * Chains all elements of an array and seperates them with commas
     * @access public
     * @param array $values
     * @return string
@@ -139,18 +139,15 @@ class SQL {
     {
         $elements = count($values);
         $count = $elements + 1;
+        $snippet = '';
         
         for ($i = 0; $i < $count; $i++)
         {
-            if ($i == 0 && $i !== $elements) {
-                $snippet = $values[$i].$this->comma;
-            } elseif ($i > 0 && $i < $elements - 1 && $i !== $elements) {
-                $snippet = $snippet.$values[$i].$this->comma;
-            } else {
-                $snippet = $snippet.$values[$elements - 1];
+            if ($i < $elements - 1 && $i !== $elements) {
+                $snippet = $snippet.$values[$i].', ';
             }
         }
-        return $snippet;
+        return $snippet.$values[$elements - 1];;
     }
     
     /**
