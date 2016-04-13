@@ -86,7 +86,7 @@ class SQL {
     * @param string $value
     * @return string
     */
-    public function addBackticks($value) {
+    private function addBackticks($value) {
         return $this->backtick.$value.$this->backtick;
     }
     
@@ -97,7 +97,7 @@ class SQL {
     * @param array $values
     * @return array
     */
-    public function arrayBackticks(array $values) {
+    private function arrayBackticks(array $values) {
         return array_map([$this, 'addBackticks'], $values);
     }
     
@@ -108,9 +108,8 @@ class SQL {
     * @param array $values
     * @return string
     */
-    public function addCommas(array $values)
-    {
-        return implode(', ', $array);
+    private function addCommas(array $values) {
+        return implode(', ', $values);
     }
     
     /**
@@ -120,7 +119,7 @@ class SQL {
     * @param string $value
     * @return string
     */
-    public function addBrackets($value) {
+    private function addBrackets($value) {
         return '('.$value.')';
     }
     
@@ -131,10 +130,8 @@ class SQL {
     * @param string $fieldname
     * @return string
     */
-    public function createPlaceholder($fieldname)
-    {
-        $placeholder = ':'.$fieldname;
-        return $placeholder;
+    public function createPlaceholder($fieldname) {
+        return ':'.$fieldname;
     }
     
     /**
