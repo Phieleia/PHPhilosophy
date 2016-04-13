@@ -233,12 +233,8 @@
         * @param string $values
         * @return string
         */
-        public function equalPlaceholder($values) {
-			
-            if (!is_array($values)) {
-                return $this->addBackticks($values).$this->equals.$this->createPlaceholder($values);
-            }
-			
+        public function equalPlaceholder($values)
+        {
             if (is_array($values)) {
 				
                 $elements = count($values);
@@ -263,6 +259,7 @@
                 }
                 return $snippet;
             }
+            return $this->addBackticks($values).$this->equals.$this->createPlaceholder($values);
         }
 		
         /**
@@ -272,17 +269,12 @@
 		* @param array|string $operators
         * @return string
         */
-        public function addWhere($columns, $operators) {
-			
+        public function addWhere($columns, $operators)
+        {
             // Compare one
-            if (!is_array($columns)) {
-                return $this->where.$this->addBackticks($columns).' '.$operators.' '.$this->createPlaceholder($columns);
-            }
-			
-            // Compare many
-            if (is_array($columns)) {
-				
-                // Number of columns
+            if (is_array($columns))
+            {
+				// Number of columns
                 $elements = count($columns);
                 $snippet = '';
 				
@@ -292,10 +284,7 @@
                     if ($i == 0) {
                         $snippet = $this->where.$this->addBackticks($columns[$i]);
 						$snippet = $snippet.' '.$operators[$i].' '.$this->createPlaceholder($columns[$i]);
-                    }
-					
-                    // The other elements
-                    if ($i !== 0) {
+                    } else  {
                         $snippet = $snippet.$this->and.$this->addBackticks($columns[$i]);
                         $snippet = $snippet.' '.$operators[$i].' '.$this->createPlaceholder($columns[$i]);
                     }
@@ -303,6 +292,8 @@
 				
                 return $snippet;
             }
+            
+            return $this->where.$this->addBackticks($columns).' '.$operators.' '.$this->createPlaceholder($columns);
         }
 		
 		/**
@@ -429,10 +420,7 @@
 			// if many column names shall be inserted
 			if (is_array($columns)) {
 				$snippet = $snippet.$this->addBrackets($this->addCommas($this->arrayBackticks($columns)));
-			}
-			
-			// if just only one column name needs to be inserted
-			if (is_array($columns) === false) {
+			} else {
 				$snippet = $snippet.$this->addBrackets($this->addBackticks($columns));
 			}
 			
@@ -450,10 +438,7 @@
                     // First element opens the brackets
                     if ($i === 0) {
                         $snippet = $snippet.'('.$this->createPlaceholder($columns[$i]);
-                    }
-					
-                    // The other elements
-                    if ($i !== 0) {
+                    } else ($i !== 0) {
                         $snippet = $snippet.$this->comma.$this->createPlaceholder($columns[$i]);
                     }
                 }
