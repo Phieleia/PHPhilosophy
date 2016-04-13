@@ -51,13 +51,7 @@ class Query {
     {
         // Prepare the statement
         $sql = $this->sql->selectWhere($columns, $table, $wheres, $operators);
-        
-        $wheres = (array) $wheres;
-        $likes = (array) $likes;
-        $wheres = $this->sql->arrayPlaceholders($wheres);
-        
-        $params = [];
-        $params = array_combine($wheres, $likes);
+        $params = $this->mergeParams($wheres, $likes, 'w');
         
         return DB::select($sql, $params);
     }
@@ -71,12 +65,7 @@ class Query {
     {
         // Prepare the SQL statement
         $sql = $this->sql->insert($table, $columns);
-        
-        $columns = (array) $columns;
-        $values = (array) $values;
-        
-        $params = [];
-        $params = array_combine($columns, $values);
+        $params = $this->mergeParams($columns, $values, 'c');
         
         return DB::insert($sql, $params);
     }
@@ -92,16 +81,10 @@ class Query {
     public function update($table, $columns, $values, $wheres, $operators, $likes)
     {
         $sql = $this->sql->update($table, $columns, $wheres, $operators);
-        
-        $columns = (array) $columns;
-        $values = (array) $values;
-        
+
         $params = [];
-        $params[] = array_combine($columns, $values);
-        
-        $wheres = (array) $wheres;
-        $likes = (array) $likes;
-        $params[] = array_combine($wheres, $likes);
+        $params[] = $this->mergeParams($columns, $values, 'c');
+        $params[] = $this->mergeParams($wheres, $likes, 'w');
         
         return DB::update($sql, $params);
     }
@@ -116,13 +99,24 @@ class Query {
     public function delete($table, $wheres, $operators, $likes)
     {
         $sql = $this->sql->delete($table, $wheres, $operators);
-        
-        $wheres = (array) $wheres;
-        $likes = (array) $likes;
-        
-        $params = [];
-        $params = array_combine($wheres, $likes);
+        $params = $this->mergeParams($wheres, $likes, 'w');
         
         return DB::delete($sql, $params);
+    }
+    
+    /**
+     * @param   array|string    $columns
+     * @param   array|string    $rows
+     * @param   string          $suffix
+     *
+     * @return  array
+     */
+    private function mergeParams($columns, $rows, $suffix = 'w')
+    {
+        $columns = (array) $columns;
+        $rows = (array) $rows;
+        $columns = $this->sql->arrayPlaceholders($columns, $suffix);
+        
+        return array_combine($columns, $rows);
     }
 }
