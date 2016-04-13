@@ -46,25 +46,7 @@ class SQL {
      * @access private
      * @var string
      */
-    private $equals = ' = ';
-    
-    /**
-     * @access private
-     * @var string
-     */
     private $values = ' VALUES ';
-    
-    /**
-     * @access private
-     * @var string
-     */
-    private $left_bracket = '(';
-    
-    /**
-     * @access private
-     * @var string
-     */
-    private $right_bracket = ')';
 
     /**
      * @access private
