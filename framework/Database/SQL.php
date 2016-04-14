@@ -180,7 +180,7 @@ class SQL {
         if (is_array($values))
         {
             $elements = count($values);
-            $count = $elements + 1;
+            $count = $elements;
             $snippet = '';
             
             for ($i = 0; $i < $count; $i++) {
