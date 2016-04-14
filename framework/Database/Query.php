@@ -80,9 +80,9 @@ class Query {
     {
         $sql = $this->sql->update($table, $columns, $wheres, $operators);
 
-        $params = [];
-        $params[] = $this->mergeParams($columns, $values, 'c');
-        $params[] = $this->mergeParams($wheres, $likes);
+        $params1 = $this->mergeParams($columns, $values, 'c');
+        $params2 = $this->mergeParams($wheres, $likes);
+        $params = array_merge($params1, $params2);
         
         return DB::update($sql, $params);
     }
