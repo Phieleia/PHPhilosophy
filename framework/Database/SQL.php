@@ -3,12 +3,15 @@
 namespace Phphilosophy\Database;
 
 /**
-* @author Pandoria <info@hippodora.de>
-* @copyright 2015 Pandoria
-* @version 0.1.0
-* @package Phphilosophy
-* @subpackage Database
-*/
+ * Phphilosophy SQL builder class
+ *
+ * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
+ * @copyright   2015-2016 Lisa Saalfrank
+ * @license	http://opensource.org/licenses/MIT MIT License
+ * @since       0.1.0
+ * @version     0.1.0
+ * @package     Phphilosophy
+ */
 class SQL {
 
     /**
@@ -37,63 +40,52 @@ class SQL {
     private $set = ' SET ';
     
     /**
-     * @access private
      * @var string
      */
     private $where = 'WHERE ';
     
     /**
-     * @access private
      * @var string
      */
     private $values = ' VALUES ';
 
     /**
-     * @access private
      * @var string
      */
     private $from = ' FROM ';
     
     /**
-     * @access private
      * @var string
      */
     private $and = ' AND ';
     
     /**
-     * @access private
      * @var string
      */
     private $comma = ', ';
     
     /**
-     * @access private
      * @var string
      */
     private $all = '*';
     
     /**
-     * @access private
      * @var string
      */
     private $backtick = '`';
     
     /**
-    * Check: OK
-    * Wraps backticks around a table or column name
-    * Before: tablename - After: `tablename`;
-    * @access public
-    * @param string $value
-    * @return string
-    */
+     * Wraps backticks around a table or column name
+     *
+     * @param   string  $value
+     *
+     * @return  string
+     */
     private function addBackticks($value) {
         return $this->backtick.$value.$this->backtick;
     }
     
     /**
-    * Check: OK
-    * Wraps every element of an array in backticks by using for.
-    * @access public
     * @param array $values
     * @return array
     */
@@ -102,9 +94,6 @@ class SQL {
     }
     
     /**
-    * Check: OK
-    * Chains all elements of an array and seperates them with commas
-    * @access public
     * @param array $values
     * @return string
     */
@@ -113,9 +102,6 @@ class SQL {
     }
     
     /**
-    * Check: OK
-    * A string is wrapped in brackets
-    * @access public
     * @param string $value
     * @return string
     */
@@ -124,9 +110,6 @@ class SQL {
     }
     
     /**
-    * Check: OK
-    * Create placeholders for hardcoded prepared statements
-    * @access public
     * @param string $fieldname
     * @return string
     */
@@ -171,7 +154,6 @@ class SQL {
     }
     
     /**
-    * @access public
     * @param string $values
     * @return string
     */
@@ -198,8 +180,6 @@ class SQL {
     }
     
     /**
-    * Adds WHERE
-    * @access public
     * @param array|string $columns
     * @param array|string $operators
     * @return string
@@ -231,15 +211,6 @@ class SQL {
     }
     
     /**
-    * ------------------------------
-    * === SQL STATEMENT BUILDING ===
-    * ------------------------------
-    */
-    
-    /**
-    * Creates SELECT for retrieving a single column: 
-    * SELECT `id` FROM `users`
-    * @access public
     * @param string $column
     * @param string $table
     * @return string
@@ -252,9 +223,6 @@ class SQL {
     }
     
     /**
-    * Selects every column through: 
-    * SELECT * FROM `users`
-    * @access public
     * @param string $table
     * @return string
     */
@@ -265,9 +233,6 @@ class SQL {
     }
     
     /**
-    * Creates a SQL such as: 
-    * SELECT `id`, `username` FROM `users`
-    * @access public
     * @param array $columns
     * @param string $table
     * @return string
@@ -280,8 +245,6 @@ class SQL {
     }
     
     /**
-    * selectOne, selectAll and selectMany combined
-    * @access public
     * @param $columns mixed
     * @param $table string
     * @return string
