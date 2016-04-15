@@ -88,9 +88,29 @@ class Phphilosophy {
      *
      * @return  void
      */
+    public function head($pattern, $action) {
+        $this->addRoute($pattern, $action, 'HEAD');
+    }
+    
+    /**
+     * @param   string          $pattern
+     * @param   mixed           $action
+     *
+     * @return  void
+     */
+    public function options($pattern, $action) {
+        $this->addRoute($pattern, $action, 'OPTIONS');
+    }
+    
+    /**
+     * @param   string          $pattern
+     * @param   mixed           $action
+     *
+     * @return  void
+     */
     public function any($pattern, $action)
     {
-        $methods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'];
+        $methods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'];
         $this->addRoute($pattern, $action, $methods);
     }
     
