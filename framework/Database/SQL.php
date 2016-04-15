@@ -13,11 +13,6 @@ namespace Phphilosophy\Database;
  * @package     Phphilosophy
  */
 class SQL {
-
-    /**
-     * @var string
-     */
-    private $insert = 'INSERT INTO ';
     
     /**
      * @var string
@@ -140,7 +135,7 @@ class SQL {
      * @return  string
      */
     private function createEquals($is, $like) {
-        $id.' = '.$like;
+        $is.' = '.$like;
     }
     
     /**
@@ -154,9 +149,10 @@ class SQL {
     }
     
     /**
-    * @param string $values
-    * @return string
-    */
+     * @param   string  $values
+     *
+     * @return  string
+     */
     public function equalPlaceholder($values, $suffix = 'w')
     {
         if (is_array($values))
@@ -264,8 +260,6 @@ class SQL {
     }
     
     /**
-    * Chains select() and addWhere()
-    * @access public
     * @param array|string $params
     * @param string $table
     * @param array|string $wheres
@@ -276,8 +270,6 @@ class SQL {
     }
     
     /**
-    * Updates existing database entries
-    * @access public 
     * @param string $table
     * @param array|string $columns
     * @param array|string $wheres
@@ -292,8 +284,6 @@ class SQL {
     }
     
     /**
-    * Deletes an existing database entry
-    * @access public
     * @param string $table
     * @param array|string $wheres
     * @param array|string $operators
@@ -310,7 +300,7 @@ class SQL {
     */
     public function insert($table, $columns)
     {
-        $snippet = $this->insert.$this->addBackticks($table).' ';
+        $snippet = 'INSERT INTO '.$this->addBackticks($table).' ';
 
         // Add the same number of placeholders
         if (is_array($columns))
