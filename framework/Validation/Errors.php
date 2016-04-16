@@ -17,7 +17,7 @@ class Errors {
     /**
      * @var array
      */
-    $errors = [];
+    private $errors = [];
     
     /**
      * @param   string  $name
