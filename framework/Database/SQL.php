@@ -70,8 +70,6 @@ class SQL {
     private $backtick = '`';
     
     /**
-     * Wraps backticks around a table or column name
-     *
      * @param   string  $value
      *
      * @return  string
@@ -81,17 +79,19 @@ class SQL {
     }
     
     /**
-    * @param array $values
-    * @return array
-    */
+     * @param   array   $values
+     *
+     * @return  array
+     */
     private function arrayBackticks(array $values) {
         return array_map([$this, 'addBackticks'], $values);
     }
     
     /**
-    * @param array $values
-    * @return string
-    */
+     * @param   array   $values
+     *
+     * @return  string
+     */
     private function addCommas(array $values) {
         return implode(', ', $values);
     }
@@ -105,9 +105,10 @@ class SQL {
     }
     
     /**
-    * @param string $fieldname
-    * @return string
-    */
+     * @param   string  $fieldname
+     *
+     * @return  string
+     */
     public function createPlaceholder($fieldname, $number) {
         return ':'.$fieldname.'_'.$number;
     }

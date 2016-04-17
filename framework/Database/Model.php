@@ -28,62 +28,70 @@ class Model {
      * @param   string  $table
      * @param   string  $name
      */
-    public function __construct($table, $name = null) {
+    public function __construct($table, $name = null)
+    {
         $this->query = new Query($name);
         $this->table = $table;
     }
     
     /**
-    * Method to retrieve everything from a database table
-    * @return array
-    */
+     * @return  mixed
+     */
     protected function getAll() {
         return $this->query->select('*', $this->table);
     }
     
     /**
-    * @param string|array $columns
-    * @return array
-    */
+     * @param   array|string    $columns
+     *
+     * @return  mixed
+     */
     protected function select($columns) {
         return $this->query->select($columns, $this->table);
     }
     
     /**
-    * @param string|array $columns
-    * @param string|array $wheres
-    * @param array|string $operators
-    * @param string|array $likes
-    * @return array 
-    */
+     * @param   array|string    $columns
+     * @param   array|string    $wheres
+     * @param   array|string    $operators
+     * @param   array|string    $likes
+     *
+     * @return  mixed
+     */
     protected function selectWhere($columns, $wheres, $operators, $likes) {
         return $this->query->selectWhere($columns, $this->table, $wheres, $operators, $likes);
     }
     
     /**
-    * @param string|array $columns
-    * @param string|array $values
-    */
+     * @param   array|string    $columns
+     * @param   array|string    $values
+     *
+     * @return  int
+     */
     protected function insert($columns, $values) {
         $this->query->insert($this->table, $columns, $values);
     }
     
     /**
-    * @param string|array $columns
-    * @param string|array $values
-    * @param string|array $wheres
-    * @param array|string $operators
-    * @param string|array $likes
-    */
+     * @param   array|string    $columns
+     * @param   array|string    $values
+     * @param   array|string    $wheres
+     * @param   array|string    $operators
+     * @param   array|string    $likes
+     *
+     * @return  int
+     */
     protected function update($columns, $values, $wheres, $operators, $likes) {
         return $this->query->update($this->table, $columns, $values, $wheres, $operators, $likes);
     }
     
     /**
-    * @param string|array $wheres
-    * @param array|string $operators
-    * @param string|array $likes
-    */
+     * @param   array|string    $wheres
+     * @param   array|string    $operators
+     * @param   array|string    $likes
+     *
+     * @return  int
+     */
     protected function delete($wheres, $operators, $likes) {
         return $this->query->delete($this->table, $wheres, $operators, $likes);
     }

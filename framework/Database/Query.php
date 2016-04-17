@@ -31,6 +31,8 @@ class Query {
     /**
      * @param   array|string    $columns
      * @param   string          $table
+     *
+     * @return  mixed
      */
     public function select($columns, $table)
     {
@@ -44,6 +46,8 @@ class Query {
      * @param   array|string    $wheres
      * @param   array|string    $operators
      * @param   array|string    $likes
+     *
+     * @return  mixed
      */
     public function selectWhere($columns, $table, $wheres, $operators, $likes)
     {
@@ -56,8 +60,10 @@ class Query {
     
     /**
      * @param   string          $table
-     * @param   string|array    $columns
-     * @param   string|array    $values
+     * @param   array|string    $columns
+     * @param   array|string    $values
+     *
+     * @return  int
      */
     public function insert($table, $columns, $values)
     {
@@ -70,11 +76,13 @@ class Query {
     
     /**
      * @param    string          $table
-     * @param    string|array    $columns
-     * @param    string|array    $values
-     * @param    string|array    $wheres
+     * @param    array|string    $columns
+     * @param    array|string    $values
+     * @param    array|string    $wheres
      * @param    array|string    $operators
-     * @param    string|array    $likes
+     * @param    array|string    $likes
+     *
+     * @return  int
      */
     public function update($table, $columns, $values, $wheres, $operators, $likes)
     {
@@ -92,6 +100,8 @@ class Query {
      * @param   array|string    $wheres
      * @param   array|string    $operators
      * @param   array|string    $likes
+     *
+     * @return  int
      */
     public function delete($table, $wheres, $operators, $likes)
     {

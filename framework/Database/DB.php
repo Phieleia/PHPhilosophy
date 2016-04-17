@@ -23,6 +23,7 @@ class DB {
     
     /**
      * @param   null|string $name
+     *
      * @return  void
      */
     public static function connect($name = null)
@@ -40,7 +41,8 @@ class DB {
     /**
      * @param   string      $sql
      * @param   array       $params
-     * @return  void
+     *
+     * @return  mixed
      */
     public static function select($sql, array $params = null)
     {
@@ -51,7 +53,8 @@ class DB {
     /**
      * @param   string  $sql
      * @param   array   $params
-     * @return  void
+     *
+     * @return  int
      */
     public static function insert($sql, array $params = null) {
         return self::cud($sql, $params);
@@ -60,7 +63,8 @@ class DB {
     /**
      * @param   string      $sql
      * @param   array       $params
-     * @return  void
+     *
+     * @return  int
      */
     public static function update($sql, array $params = null) {
         return self::cud($sql, $params);
@@ -69,7 +73,8 @@ class DB {
     /**
      * @param   string      $sql
      * @param   array       $params
-     * @return  void
+     *
+     * @return  int
      */
     public static function delete($sql, array $params = null) {
         return self::cud($sql, $params);
@@ -78,7 +83,8 @@ class DB {
     /**
      * @param   string      $sql
      * @param   array       $params
-     * @return  void
+     *
+     * @return  int
      */
     private function cud($sql, array $params = null)
     {
@@ -91,6 +97,7 @@ class DB {
     /**
      * @param   string      $sql
      * @param   null|array  $params
+     *
      * @return  \PDOStatement
      */
     private function query($sql, array $params = null)
@@ -103,6 +110,7 @@ class DB {
     
     /**
      * @param   string  $sql
+     *
      * @return  int
      */
     private function execute($sql) {
