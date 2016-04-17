@@ -30,6 +30,7 @@ class Phphilosophy {
     public function __construct()
     {
         $this->router = new Router();
+        ob_start();
     }
     
     /**
@@ -150,7 +151,9 @@ class Phphilosophy {
     /**
      * @return  void
      */
-    public function run() {
+    public function run()
+    {
         $this->router->dispatch();
+        ob_end_flush();
     }
 }
