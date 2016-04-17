@@ -20,6 +20,28 @@ class Errors {
     private $errors = [];
     
     /**
+     * @var string
+     */
+    private $openingTag = '';
+    
+    /**
+     * @var string
+     */
+    private $closingTag = '';
+    
+    /**
+     * @param   string  $start
+     * @param   string  $end
+     *
+     * @return  void
+     */
+    public function tags($start, $end)
+    {
+        $this->openingTag = $start;
+        $this->closingTag = $end;
+    }
+    
+    /**
      * @param   string  $name
      * @param   string  $value
      *
@@ -37,7 +59,7 @@ class Errors {
     public function get($name)
     {
         if ($this->has($name)) {
-            echo $name;
+            echo $this->openingTag.$name.$this->closingTag;
         }
     }
     
