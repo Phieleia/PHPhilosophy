@@ -157,20 +157,10 @@ class SQL {
     {
         if (is_array($values))
         {
-            $elements = count($values);
-            $count = $elements;
-            $snippet = '';
-            
-            for ($i = 0; $i < $count; $i++) {
-                if ($i >= 0 && $i < $elements - 1 && $i !== $elements) {
-                    $snippet = $snippet.$this->addBackticks($values[$i]).' = ';
-                    $snippet = $snippet.$this->createPlaceholder($values[$i], $i).$suffix.', ';
-                } else {
-                    $snippet = $snippet.$this->addBackticks($values[$elements - 1]);
-                    $snippet = $snippet.' = '.$this->createPlaceholder($values[$elements - 1], $i).$suffix;
-                }
-            }
-            return $snippet;
+            $values = $this->arrayBackticks($values);
+            $placeholders = $this->arrayPlaceholders($values, $suffix);
+            $equals = $this->arrayEquals($values, $placeholders);
+            return $this->addCommas($equals);
         }
         return $this->addBackticks($values).' = '.$this->createPlaceholder($values, 0).$suffix;
     }
