@@ -135,7 +135,7 @@ class SQL {
      * @return  string
      */
     private function createEquals($is, $like) {
-        $is.' = '.$like;
+        return $is.' = '.$like;
     }
     
     /**
@@ -157,9 +157,9 @@ class SQL {
     {
         if (is_array($values))
         {
-            $values = $this->arrayBackticks($values);
+            $fields = $this->arrayBackticks($values);
             $placeholders = $this->arrayPlaceholders($values, $suffix);
-            $equals = $this->arrayEquals($values, $placeholders);
+            $equals = $this->arrayEquals($fields, $placeholders);
             return $this->addCommas($equals);
         }
         return $this->addBackticks($values).' = '.$this->createPlaceholder($values, 0).$suffix;
