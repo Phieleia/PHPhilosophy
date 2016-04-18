@@ -1,6 +1,6 @@
 <?php
 
-namespace Phphilosophy\Security;
+namespace Phphilosophy\Validation;
 
 /**
  * Phphilosophy Input Validation
@@ -30,6 +30,11 @@ class Validation {
     private $messages = [];
     
     /**
+     * @var \Phphilosophy\Validation\Errors
+     */
+    private $errors;
+    
+    /**
      * @param   array   $input
      * @param   array   $rules
      * @param   array   $messages
@@ -42,5 +47,13 @@ class Validation {
         $this->input = $input;
         $this->rules = $rules;
         $this->messages = $messages;
+        $this->errors = new Errors();
+    }
+    
+    /**
+     * @return  \Phphilosophy\Validation\Errors
+     */
+    public function errors() {
+        return $this->errors;
     }
 }
