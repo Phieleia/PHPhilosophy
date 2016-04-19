@@ -68,6 +68,7 @@ class Query {
     {
         $columns = array_keys($insert);
         $values = array_values($insert);
+        
         // Prepare the SQL statement
         $sql = $this->sql->insert($table, $columns);
         $params = $this->mergeParams($columns, $values, 'c');
@@ -76,17 +77,19 @@ class Query {
     }
     
     /**
-     * @param    string          $table
-     * @param    array|string    $columns
-     * @param    array|string    $values
-     * @param    array|string    $wheres
-     * @param    array|string    $operators
-     * @param    array|string    $likes
+     * @param   string          $table
+     * @param   array           $insert
+     * @param   array|string    $wheres
+     * @param   array|string    $operators
+     * @param   array|string    $likes
      *
      * @return  int
      */
-    public function update($table, $columns, $values, $wheres, $operators, $likes)
+    public function update($table, array $insert, $wheres, $operators, $likes)
     {
+        $columns = array_keys($insert);
+        $values = array_values($insert);
+        
         $sql = $this->sql->update($table, $columns, $wheres, $operators);
 
         $params1 = $this->mergeParams($columns, $values, 'c');
