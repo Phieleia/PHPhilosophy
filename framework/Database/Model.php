@@ -63,13 +63,12 @@ class Model {
     }
     
     /**
-     * @param   array|string    $columns
-     * @param   array|string    $values
+     * @param   array   $inserts
      *
      * @return  int
      */
-    protected function insert($columns, $values) {
-        $this->query->insert($this->table, $columns, $values);
+    protected function insert(array $inserts) {
+        $this->query->insert($this->table, $inserts);
     }
     
     /**

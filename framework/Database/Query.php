@@ -60,13 +60,14 @@ class Query {
     
     /**
      * @param   string          $table
-     * @param   array|string    $columns
-     * @param   array|string    $values
+     * @param   array           $insert
      *
      * @return  int
      */
-    public function insert($table, $columns, $values)
+    public function insert($table, array $insert)
     {
+        $columns = array_keys($insert);
+        $values = array_values($insert);
         // Prepare the SQL statement
         $sql = $this->sql->insert($table, $columns);
         $params = $this->mergeParams($columns, $values, 'c');
