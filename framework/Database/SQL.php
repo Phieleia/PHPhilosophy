@@ -150,7 +150,7 @@ class SQL {
     }
     
     /**
-     * @param   string  $values
+     * @param   array   $values
      *
      * @return  string
      */
@@ -251,7 +251,7 @@ class SQL {
     }
     
     /**
-    * @param array|string $params
+    * @param array|string $columns
     * @param string $table
     * @param array|string $wheres
     * @param array|string $operators
