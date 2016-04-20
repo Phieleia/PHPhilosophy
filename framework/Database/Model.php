@@ -42,7 +42,7 @@ class Model {
     }
     
     /**
-     * @param   array|string    $columns
+     * @param   array   $columns
      *
      * @return  mixed
      */
@@ -72,16 +72,15 @@ class Model {
     }
     
     /**
-     * @param   array|string    $columns
-     * @param   array|string    $values
+     * @param   array           $inserts
      * @param   array|string    $wheres
      * @param   array|string    $operators
      * @param   array|string    $likes
      *
      * @return  int
      */
-    protected function update($columns, $values, $wheres, $operators, $likes) {
-        return $this->query->update($this->table, $columns, $values, $wheres, $operators, $likes);
+    protected function update(array $inserts, $wheres, $operators, $likes) {
+        return $this->query->update($this->table, $inserts, $wheres, $operators, $likes);
     }
     
     /**
