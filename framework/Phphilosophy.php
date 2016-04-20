@@ -2,6 +2,7 @@
 
 namespace Phphilosophy;
 
+use Phphilosophy\Http\Request;
 use Phphilosophy\Router\Route;
 use Phphilosophy\Router\Router;
 
@@ -27,9 +28,9 @@ class Phphilosophy {
      */
     private $router;
     
-    public function __construct()
+    public function __construct(Request $request)
     {
-        $this->router = new Router();
+        $this->router = new Router($request);
         ob_start();
     }
     

@@ -1,6 +1,7 @@
 <?php
 
 use Phphilosophy\Phphilosophy;
+use Phphilosophy\Http\Request;
 
 /*
  * Phphilosophy index file
@@ -11,7 +12,8 @@ use Phphilosophy\Phphilosophy;
 
 require __DIR__.'/../bootstrap/bootstrap.php';
 
-$app = new Phphilosophy(); 
+$request = new Request();
+$app = new Phphilosophy($request); 
 
 /*
  * PLEASE ADD YOUR ROUTES HERE

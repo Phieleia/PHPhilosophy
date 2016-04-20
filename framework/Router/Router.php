@@ -28,11 +28,6 @@ class Router {
     private $notFound;
     
     /**
-     * @var     \Phphilosophy\Http\Request
-     */
-    private $request;
-    
-    /**
      * @var     \Phphilosophy\Router\Parser
      */
     private $parser;
@@ -47,10 +42,10 @@ class Router {
      */
     private $match = false;
 
-    public function __construct() {
-        $this->request = new Request();
-        $this->parser = new Parser($this->request);
-        $this->matcher = new Matcher($this->request);
+    public function __construct(Request $request)
+    {
+        $this->parser = new Parser($request);
+        $this->matcher = new Matcher($request);
     }
     
     /**
@@ -69,10 +64,11 @@ class Router {
 
     /**
      * @param   \Phphilosophy\Router\Route  $route  A route instance
+     *
      * @return  void
      */
-    private function match(Route $route) {
-            
+    private function match(Route $route)
+    { 
         // The pattern given by the user
         $pattern = $route->getPattern();
         
@@ -87,8 +83,8 @@ class Router {
     /**
      * @return  void
      */
-    public function dispatch() {
-        
+    public function dispatch()
+    {
         // Searches the routes array for any matches
         foreach ($this->routes as $route) {
             $this->match($route);
