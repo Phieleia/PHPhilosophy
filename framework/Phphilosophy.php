@@ -141,7 +141,7 @@ class Phphilosophy {
     }
 
     /**
-     * @param   mixed   $action     The fallback callable
+     * @param   callable    $action     The fallback callable
      *
      * @return  void
      */
