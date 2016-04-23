@@ -86,7 +86,7 @@ class DB {
      *
      * @return  int
      */
-    private function cud($sql, array $params = null)
+    private static function cud($sql, array $params = null)
     {
         if (is_null($params)) {
             return self::execute($sql);
@@ -100,7 +100,7 @@ class DB {
      *
      * @return  \PDOStatement
      */
-    private function query($sql, array $params = null)
+    private static function query($sql, array $params = null)
     {
         if (is_null($params)) {
             return self::$connection->query($sql);
@@ -113,7 +113,7 @@ class DB {
      *
      * @return  int
      */
-    private function execute($sql) {
+    private static function execute($sql) {
         return self::$connection->execute($sql);
     }
     
