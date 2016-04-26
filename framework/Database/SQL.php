@@ -97,8 +97,9 @@ class SQL {
     }
     
     /**
-    * @param string $value
-    * @return string
+     * @param   string  $value
+     *
+     * @return  string
     */
     private function addBrackets($value) {
         return '('.$value.')';
