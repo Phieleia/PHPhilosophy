@@ -22,6 +22,16 @@ class DB {
     private static $connection;
     
     /**
+     * @var int
+     */
+    private static $fetchMode = \PDO::FETCH_CLASS;
+    
+    /** 
+     * @var string
+     */
+    private static $fetchClass = 'stdClass';
+    
+    /**
      * @param   null|string $name
      *
      * @return  void
@@ -39,6 +49,18 @@ class DB {
     }
     
     /**
+     * @param   int     $mode
+     * @param   string  $class
+     *
+     * @return  void
+     */
+    public static function setFetchMode($mode, $class)
+    {
+        self::$fetchMode = $mode;
+        self::$fetchClass = $class;
+    }
+    
+    /**
      * @param   string      $sql
      * @param   array       $params
      *
@@ -47,7 +69,7 @@ class DB {
     public static function select($sql, array $params = null)
     {
         $result = self::query($sql, $params);
-        return $result->fetchAll(\PDO::FETCH_CLASS, 'stdClass');
+        return $result->fetchAll(self::$fetchMode, self::$fetchClass);
     }
     
     /**
