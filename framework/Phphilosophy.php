@@ -3,6 +3,8 @@
 namespace Phphilosophy;
 
 use Phphilosophy\Http\Request;
+use Phphilosophy\Http\Response;
+
 use Phphilosophy\Router\Route;
 use Phphilosophy\Router\Router;
 
@@ -152,9 +154,19 @@ class Phphilosophy {
     /**
      * @return  void
      */
+    private function respond()
+    {
+        $content = ob_get_clean();
+        $response = new Response($content);
+        $response->send();
+    }
+    
+    /**
+     * @return  void
+     */
     public function run()
     {
         $this->router->dispatch();
-        ob_end_flush();
+        $this->respond();
     }
 }
