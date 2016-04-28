@@ -2,6 +2,8 @@
 
 namespace Phphilosophy;
 
+use Phphilosophy\Application\Config;
+
 /**
  * View rendering class
  *
@@ -20,6 +22,11 @@ class View {
     private $views = '../application/views/';
     
     /**
+     * @var string
+     */
+    private $fileExtension = '.php';
+    
+    /**
      * @var array
      */
     private $variables = [];
@@ -32,6 +39,7 @@ class View {
         if ($views !== null) {
             $this->views = $views;
         }
+        $this->fileExtension = Config::get('view.extension', '.php');
     }
     
     /**
@@ -40,6 +48,7 @@ class View {
      */
     public function render($file)
     {
+        $file = rtrim($file, $this->fileExtension).$this->fileExtension;
         if (file_exists($this->views.$file)) {
             include $this->views.$file;
         }

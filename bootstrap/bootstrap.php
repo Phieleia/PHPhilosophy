@@ -31,3 +31,4 @@ $autoload->register();
 // Add config values
 Config::set('database', $database);
 Config::set('app.name', $configs['app.name']);
+Config::set('app.view_ext', $configs['app.view_ext']);

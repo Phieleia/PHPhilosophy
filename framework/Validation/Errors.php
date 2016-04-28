@@ -59,7 +59,7 @@ class Errors {
     public function get($name)
     {
         if ($this->has($name)) {
-            echo $this->openingTag.$name.$this->closingTag;
+            echo $this->openingTag.$this->errors[$name].$this->closingTag;
         }
     }
     
