@@ -44,6 +44,7 @@ class View {
     
     /**
      * @param   string  $file
+     *
      * @return  void
      */
     public function render($file)
@@ -57,6 +58,7 @@ class View {
     /**
      * @param   string  $name
      * @param   mixed	$value
+     *
      * @return  void
      */
     public function __set($name, $value) {

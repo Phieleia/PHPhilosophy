@@ -44,7 +44,8 @@ class Matcher {
     /**
      * @param   string  $token      The parameter type
      * @param   string  $pattern    The route pattern
-     * @return  string  The route regex
+     *
+     * @return  string    The route regex
      */
     private function translate($token, $pattern)
     {
@@ -62,6 +63,7 @@ class Matcher {
     
     /**
      * @param   \Phphilosophy\Router\Route  $route  A route instance
+     *
      * @return  string  The pattern as a regex
      */
     private function parse(Route $route)
@@ -83,6 +85,7 @@ class Matcher {
     
     /**
      * @param   \Phphilosophy\Router\Route  $route  A route instance
+     *
      * @return  boolean     Was there any match?
      */
     public function match(Route $route)
