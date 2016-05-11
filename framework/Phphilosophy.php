@@ -31,9 +31,14 @@ class Phphilosophy {
     private $router;
     
     /**
-     * @var array
+     * @var array|null
      */
-    private $guard;
+    private $guard = null;
+    
+    /**
+     * @var string|null
+     */
+    private $redirect = null;
     
     public function __construct(Request $request)
     {
