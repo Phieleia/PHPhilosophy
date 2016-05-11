@@ -33,6 +33,16 @@ class Route {
     private $methods = [];
     
     /**
+     * @var array|null
+     */
+    private $guard = null;
+    
+    /**
+     * @var string|null
+     */
+    private $redirect = null;
+    
+    /**
      * @param   string          $pattern    The route pattern
      * @param   mixed           $action     The route action 
      * @param   array|string    $methods    The route methods
@@ -70,32 +80,33 @@ class Route {
             $this->action = $action;
         }
         
+        // The namespace to be used with controllers
+        $namespace = '\\'.Config::get('app.name').'\\Controller\\';
+        
         // If the route action is an array (Controller), create new callable
         if (is_array($action)) {
-            $this->action = $this->createCallable($action[0], $action[1]);
+            $this->action = $this->createCallable($namespace.$action[0], $action[1]);
         }
         
         // If the string notation was used
         if ($this->isController($action) !== false) {
             $array = explode('@', $action);
-            $this->action = $this->createCallable($array[0], $array[1]);
+            $this->action = $this->createCallable($namespace.$array[0], $array[1]);
         }
     }
     
     /**
-     * @param   string      $controller     The route controller
-     * @param   string      $method         The route action
-     * @return  callable    The route action
+     * @param   string      $namespace
+     * @param   string      $controller
+     * @param   string      $method
+     *
+     * @return  callable
      */
-    private function createCallable($controller, $method)
+    public function createCallable($classname, $method)
     {
-        // The namespace to be used with controllers
-        $namespace = '\\'.Config::get('app.name').'\\Controller\\';
-        $controller = $namespace.$controller;
-        
         // Create new anonymous function which calls controller -> method
-        $callable = function() use ($controller, $method) {
-            $class = new $controller;
+        $callable = function() use ($classname, $method) {
+            $class = new $classname;
             return call_user_func_array([$class, $method], func_get_args());
         };
         return $callable;
@@ -137,5 +148,41 @@ class Route {
      */
     public function getMethods() {
         return $this->methods;
+    }
+    
+    /**
+     * @return  boolean
+     */
+    public function hasGuard() {
+        return !is_null($this->guard);
+    }
+    
+    /**
+     * @return  callable
+     */
+    public function getGuard()
+    {
+        // Add the namespace prefix for the guard classes to the classname
+        $classname = '\\'.Config::get('app.name').'\\Guard\\'.$this->guard[0];
+        return $this->createCallable($classname, $this->guard[1]);
+    }
+    
+    /**
+     * @return  string|null
+     */
+    public function getRedirect() {
+        return $this->redirect;
+    }
+    
+    /**
+     * @param   array   $guard
+     * @param   string  $redirect
+     *
+     * @return  void
+     */
+    public function setGuard(array $guard, $redirect)
+    {
+        $this->guard = $guard;
+        $this->redirect = $redirect;
     }
 }

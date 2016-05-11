@@ -22,6 +22,7 @@ $autoload = new Autoloader();
 // Add namespace prefixes
 $autoload->addNamespace('Phphilosophy', __DIR__.'/../framework/');
 $autoload->addNamespace($configs['app.name'].'\\Model', __DIR__.'/../application/models/');
+$autoload->addNamespace($configs['app.name'].'\\Guard', __DIR__.'/../application/guards/');
 $autoload->addNamespace($configs['app.name'].'\\Controller', __DIR__.'/../application/controllers/');
 $autoload->addNamespace($configs['app.name'].'\\Library', __DIR__.'/../application/libraries/');
 

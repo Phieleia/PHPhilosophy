@@ -61,6 +61,37 @@ class Router {
     public function setNotFound($action) {
         $this->notFound = $action;
     }
+    
+    /**
+     * @param   callable    $guard
+     * @param   string      $redirect
+     *
+     * @return  void
+     */
+    private function protect($guard, $redirect)
+    {
+        // Check if the guard went off
+        $valid = call_user_func($guard);
+        
+        // if it did, redirect to the specified location
+        if ($valid === false) {
+            header('Location: '. $redirect);
+            exit;
+        }
+    }
+    
+    /**
+     * @param   \Equidea\Router\Route   $route
+     *
+     * @return  boolean
+     */
+    private function guard(Route $route)
+    {
+        if ($route->hasGuard()) {
+            $this->protect($route->getGuard(), $route->getRedirect());
+        }
+        return true;
+    }
 
     /**
      * @param   \Phphilosophy\Router\Route  $route  A route instance
@@ -73,7 +104,7 @@ class Router {
         $pattern = $route->getPattern();
         
         // Run the callable
-        if ($this->matcher->match($route)) {
+        if ($this->matcher->match($route) && $this->guard($route)) {
             $params = $this->parser->parse($pattern);
             $this->match = true;
             call_user_func_array($route->getAction(), $params);

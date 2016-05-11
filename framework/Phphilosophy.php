@@ -26,9 +26,14 @@ class Phphilosophy {
     const VERSION = '0.1.0';
     
     /**
-     * @var     \Phphilosophy\Router\Router
+     * @var \Phphilosophy\Router\Router
      */
     private $router;
+    
+    /**
+     * @var array
+     */
+    private $guard;
     
     public function __construct(Request $request)
     {
@@ -130,6 +135,27 @@ class Phphilosophy {
     }
     
     /**
+     * @param   array       $guard
+     * @param   callable    $routes
+     * @param   string      $redirect
+     *
+     * @return  void
+     */
+    public function guard(array $guard, callable $routes, $redirect)
+    {
+        // Add a guard to the settings
+        $this->guard = $guard;
+        $this->redirect = $redirect;
+        
+        // Add the routes to the router
+        call_user_func($routes);
+        
+        // Reset the settings and remove the guards
+        $this->guard = null;
+        $this->redirect = null;
+    }
+    
+    /**
      * @param   string          $pattern    The route pattern
      * @param   mixed           $action     The route action
      * @param   array|string    $methods    The route method(s)
@@ -138,7 +164,15 @@ class Phphilosophy {
      */
     private function addRoute($pattern, $action, $methods)
     {
+        // Create new route entity
         $route = new Route($pattern, $action, $methods);
+        
+        // If a guard is present, add it to the route object
+        if (!is_null($this->guard) && !is_null($this->redirect)) {
+            $route->setGuard($this->guard, $this->redirect);
+        }
+        
+        // Add route entity to the internal route collection
         $this->router->addRoute($route);
     }
 
