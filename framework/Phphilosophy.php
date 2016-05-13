@@ -28,21 +28,21 @@ class Phphilosophy {
     /**
      * @var \Phphilosophy\Router\Router
      */
-    private $router;
+    private static $router;
     
     /**
      * @var array|null
      */
-    private $guard = null;
+    private static $guard = null;
     
     /**
      * @var string|null
      */
-    private $redirect = null;
+    private static $redirect = null;
     
-    public function __construct(Request $request)
+    public static function register(Request $request)
     {
-        $this->router = new Router($request);
+        self::$router = new Router($request);
         ob_start();
     }
     
@@ -52,8 +52,8 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public function get($pattern, $action) {
-        $this->addRoute($pattern, $action, 'GET');
+    public static function get($pattern, $action) {
+        self::addRoute($pattern, $action, 'GET');
     }
     
     /**
@@ -62,8 +62,8 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public function post($pattern, $action) {
-        $this->addRoute($pattern, $action, 'POST');
+    public static function post($pattern, $action) {
+        self::addRoute($pattern, $action, 'POST');
     }
     
     /**
@@ -72,8 +72,8 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public function put($pattern, $action) {
-        $this->addRoute($pattern, $action, 'PUT');
+    public static function put($pattern, $action) {
+        self::addRoute($pattern, $action, 'PUT');
     }
     
     /**
@@ -82,8 +82,8 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public function patch($pattern, $action) {
-        $this->addRoute($pattern, $action, 'PATCH');
+    public static function patch($pattern, $action) {
+        self::addRoute($pattern, $action, 'PATCH');
     }
     
     /**
@@ -92,8 +92,8 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public function delete($pattern, $action) {
-        $this->addRoute($pattern, $action, 'DELETE');
+    public static function delete($pattern, $action) {
+        self::addRoute($pattern, $action, 'DELETE');
     }
     
     /**
@@ -102,8 +102,8 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public function head($pattern, $action) {
-        $this->addRoute($pattern, $action, 'HEAD');
+    public static function head($pattern, $action) {
+        self::addRoute($pattern, $action, 'HEAD');
     }
     
     /**
@@ -112,8 +112,8 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public function options($pattern, $action) {
-        $this->addRoute($pattern, $action, 'OPTIONS');
+    public static function options($pattern, $action) {
+        self::addRoute($pattern, $action, 'OPTIONS');
     }
     
     /**
@@ -122,10 +122,10 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public function any($pattern, $action)
+    public static function any($pattern, $action)
     {
         $methods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'];
-        $this->addRoute($pattern, $action, $methods);
+        self::addRoute($pattern, $action, $methods);
     }
     
     /**
@@ -135,8 +135,8 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public function add($methods, $pattern, $action) {
-        $this->addRoute($pattern, $action, $methods);
+    public static function add($methods, $pattern, $action) {
+        self::addRoute($pattern, $action, $methods);
     }
     
     /**
@@ -146,18 +146,18 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public function guard(array $guard, callable $routes, $redirect)
+    public static function guard(array $guard, callable $routes, $redirect)
     {
         // Add a guard to the settings
-        $this->guard = $guard;
-        $this->redirect = $redirect;
+        self::$guard = $guard;
+        self::$redirect = $redirect;
         
         // Add the routes to the router
         call_user_func($routes);
         
         // Reset the settings and remove the guards
-        $this->guard = null;
-        $this->redirect = null;
+        self::$guard = null;
+        self::$redirect = null;
     }
     
     /**
@@ -167,18 +167,18 @@ class Phphilosophy {
      *
      * @retun   void
      */
-    private function addRoute($pattern, $action, $methods)
+    private static function addRoute($pattern, $action, $methods)
     {
         // Create new route entity
         $route = new Route($pattern, $action, $methods);
         
         // If a guard is present, add it to the route object
-        if (!is_null($this->guard) && !is_null($this->redirect)) {
-            $route->setGuard($this->guard, $this->redirect);
+        if (!is_null(self::$guard) && !is_null(self::$redirect)) {
+            $route->setGuard(self::$guard, self::$redirect);
         }
         
         // Add route entity to the internal route collection
-        $this->router->addRoute($route);
+        self::$router->addRoute($route);
     }
 
     /**
@@ -186,14 +186,14 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public function notFound($action) {
-        $this->router->setNotFound($action);
+    public static function notFound($action) {
+        self::$router->setNotFound($action);
     }
     
     /**
      * @return  void
      */
-    private function respond()
+    private static function respond()
     {
         $content = ob_get_clean();
         $response = new Response($content);
@@ -203,9 +203,9 @@ class Phphilosophy {
     /**
      * @return  void
      */
-    public function run()
+    public static function run()
     {
-        $this->router->dispatch();
-        $this->respond();
+        self::$router->dispatch();
+        self::respond();
     }
 }

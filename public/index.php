@@ -13,20 +13,20 @@ use Phphilosophy\Http\Request;
 require __DIR__.'/../bootstrap/bootstrap.php';
 
 $request = new Request();
-$app = new Phphilosophy($request); 
+Phphilosophy::register($request);
 
 /*
  * PLEASE ADD YOUR ROUTES HERE
  */
-$app->get('/', function() {
+Phphilosophy::get('/', function() {
     echo 'Welcome to PHPhilosophy!';
 });
 
 /*
  * HERE YOU CAN CUSTOMIZE YOUR ERROR PAGE
  */
-$app->notFound(function() {
+Phphilosophy::notFound(function() {
     echo 'The page you requested could not be found!';
 });
 
-$app->run();
+Phphilosophy::run();
