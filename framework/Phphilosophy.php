@@ -140,6 +140,24 @@ class Phphilosophy {
     }
     
     /**
+     * @param   string      $pattern
+     * @param   callable    $routes
+     *
+     * @return  void
+     */
+    public static function group($pattern, callable $routes)
+    {
+        // Add the group prefix to the settings
+        self::$group = $pattern;
+        
+        // Add the routes to the router
+        call_user_func($routes);
+        
+        // Reset the settings and remove the group prefix
+        self::$group = '';
+    }
+    
+    /**
      * @param   array       $guard
      * @param   callable    $routes
      * @param   string      $redirect
