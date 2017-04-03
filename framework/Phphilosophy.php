@@ -9,12 +9,11 @@ use Phphilosophy\Router\Route;
 use Phphilosophy\Router\Router;
 
 /**
- * Phphilosophy Micro PHP Framework for PHP 5.5
+ * Phphilosophy Micro PHP Framework for PHP 7.0
  *
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2015-2016 Lisa Saalfrank
- * @license	http://opensource.org/licenses/MIT MIT License
- * @since       0.1.0
+ * @copyright   2015-2017 Lisa Saalfrank
+ * @license     MIT License http://opensource.org/licenses/MIT
  * @version     0.1.0
  * @package     Phphilosophy
  */
@@ -52,7 +51,7 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public static function get($pattern, $action) {
+    public static function get(string $pattern, $action) {
         self::addRoute($pattern, $action, 'GET');
     }
     
@@ -62,7 +61,7 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public static function post($pattern, $action) {
+    public static function post(string $pattern, $action) {
         self::addRoute($pattern, $action, 'POST');
     }
     
@@ -72,7 +71,7 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public static function put($pattern, $action) {
+    public static function put(string $pattern, $action) {
         self::addRoute($pattern, $action, 'PUT');
     }
     
@@ -82,7 +81,7 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public static function patch($pattern, $action) {
+    public static function patch(string $pattern, $action) {
         self::addRoute($pattern, $action, 'PATCH');
     }
     
@@ -92,7 +91,7 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public static function delete($pattern, $action) {
+    public static function delete(string $pattern, $action) {
         self::addRoute($pattern, $action, 'DELETE');
     }
     
@@ -102,7 +101,7 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public static function head($pattern, $action) {
+    public static function head(string $pattern, $action) {
         self::addRoute($pattern, $action, 'HEAD');
     }
     
@@ -112,7 +111,7 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public static function options($pattern, $action) {
+    public static function options(string $pattern, $action) {
         self::addRoute($pattern, $action, 'OPTIONS');
     }
     
@@ -122,7 +121,7 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public static function any($pattern, $action)
+    public static function any(string $pattern, $action)
     {
         $methods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'];
         self::addRoute($pattern, $action, $methods);
@@ -135,7 +134,7 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public static function add($methods, $pattern, $action) {
+    public static function add(array $methods, string $pattern, $action) {
         self::addRoute($pattern, $action, $methods);
     }
     
@@ -145,7 +144,7 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public static function group($pattern, callable $routes)
+    public static function group(string $pattern, callable $routes)
     {
         // Add the group prefix to the settings
         self::$group = $pattern;
@@ -164,7 +163,7 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public static function guard(array $guard, callable $routes, $redirect)
+    public static function guard(array $guard, callable $routes, string $redirect)
     {
         // Add a guard to the settings
         self::$guard = $guard;
@@ -185,7 +184,7 @@ class Phphilosophy {
      *
      * @retun   void
      */
-    private static function addRoute($pattern, $action, $methods)
+    private static function addRoute(string $pattern, $action, $methods)
     {
         // Create new route entity
         $route = new Route($pattern, $action, $methods);
@@ -204,7 +203,7 @@ class Phphilosophy {
      *
      * @return  void
      */
-    public static function notFound($action) {
+    public static function notFound(callable $action) {
         self::$router->setNotFound($action);
     }
     
