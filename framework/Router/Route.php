@@ -5,15 +5,13 @@ namespace Phphilosophy\Router;
 use Phphilosophy\Application\Config;
 
 /**
- * Phphilosophy route entity
+ * Phphilosophy Micro PHP Framework for PHP 7.0
  *
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2015-2016 Lisa Saalfrank
- * @license	http://opensource.org/licenses/MIT MIT License
- * @since       0.1.0
+ * @copyright   2015-2017 Lisa Saalfrank
+ * @license     MIT License http://opensource.org/licenses/MIT
  * @version     0.1.0
  * @package     Phphilosophy
- * @subpackage  Router
  */
 class Route {
     
@@ -96,7 +94,6 @@ class Route {
     }
     
     /**
-     * @param   string      $namespace
      * @param   string      $controller
      * @param   string      $method
      *
