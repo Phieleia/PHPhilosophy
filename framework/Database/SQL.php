@@ -316,8 +316,7 @@ class SQL {
             return $snippet.')';
         }
         
-        $snippet = $snippet.$this->values;
-        $snippet = $snippet.$this->addBrackets($this->addBackticks($columns));
+        $snippet = $snippet.$this->values.$this->addBrackets($this->addBackticks($columns));
         return $snippet.$this->createPlaceholder($columns, 0).'c';
     }
 }
