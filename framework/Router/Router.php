@@ -75,7 +75,7 @@ class Router {
         
         // if it did, redirect to the specified location
         if ($valid === false) {
-            header('Location: '. $redirect);
+            header('Location: '.$redirect);
             exit;
         }
     }
