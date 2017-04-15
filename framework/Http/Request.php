@@ -21,6 +21,16 @@ class Request {
     private $request = [];
     
     /**
+     * @var string
+     */
+    private $method;
+    
+    /**
+     * @var string
+     */
+    private $uri;
+    
+    /**
      * @var     array   Array with get/post data
      */
     private $input = [];
@@ -31,11 +41,11 @@ class Request {
      */
     protected function setRequest()
     {
-        // The HTTP request URI
-        $this->request['REQUEST_URI'] = $_SERVER['REQUEST_URI'];
-        
         // The HTTP request method
-        $this->request['REQUEST_METHOD'] = $_SERVER['REQUEST_METHOD'];
+        $this->method = $_SERVER['REQUEST_METHOD'];
+        
+        // The HTTP request URI
+        $this->uri = $_SERVER['REQUEST_URI'];
         
         // The query string (with GET data)
         $this->request['QUERY_STRING'] = (isset($_SERVER['QUERY_STRING'])) ? $_SERVER['QUERY_STRING'] : '';
@@ -53,7 +63,7 @@ class Request {
      * @return  string  Returns the request method.
      */
     public function getMethod() {
-        return $this->request['REQUEST_METHOD'];
+        return $this->method;
     }
     
     /**
@@ -61,7 +71,7 @@ class Request {
      * @return  string  The request uri
      */
     public function getRequestTarget() {
-        return $this->request['REQUEST_URI'];
+        return $this->uri;
     }
     
     /**
@@ -70,7 +80,7 @@ class Request {
      */
     public function uriSegments()
     {
-        $uri = new Uri($this->request['REQUEST_URI']);
+        $uri = new Uri($this->uri);
         return $uri->getSegments();
     }
     
