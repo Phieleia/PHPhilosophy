@@ -100,7 +100,7 @@ class SQL {
      * @param   string  $value
      *
      * @return  string
-    */
+     */
     private function addBrackets($value) {
         return '('.$value.')';
     }
@@ -168,10 +168,10 @@ class SQL {
     }
     
     /**
-    * @param array|string $columns
-    * @param array|string $operators
-    * @return string
-    */
+     * @param array|string $columns
+     * @param array|string $operators
+     * @return string
+     */
     public function addWhere($columns, $operators)
     {
         // Compare one
@@ -187,7 +187,7 @@ class SQL {
                 // First element
                 if ($i == 0) {
                     $snippet = 'WHERE '.$cleanColumns[$i];
-                } else  {
+                } else {
                     $snippet = $snippet.$this->and.$cleanColumns[$i];
                 }
                 $snippet = $snippet.' '.$operators[$i].' '.$this->createPlaceholder($columns[$i], $i).'w';
@@ -199,10 +199,10 @@ class SQL {
     }
     
     /**
-    * @param string $column
-    * @param string $table
-    * @return string
-    */
+     * @param string $column
+     * @param string $table
+     * @return string
+     */
     public function selectOne($column, $table)
     {
         $snippet = $this->select.$this->addBackticks($column);
@@ -211,9 +211,9 @@ class SQL {
     }
     
     /**
-    * @param string $table
-    * @return string
-    */
+     * @param string $table
+     * @return string
+     */
     public function selectAll($table)
     {
         $snippet = $this->select.$this->all.$this->from.$this->addBackticks($table);
@@ -221,10 +221,10 @@ class SQL {
     }
     
     /**
-    * @param array $columns
-    * @param string $table
-    * @return string
-    */
+     * @param array $columns
+     * @param string $table
+     * @return string
+     */
     public function selectMany(array $columns, $table)
     {
         $clean_columns = $this->arrayBackticks($columns);
@@ -233,10 +233,10 @@ class SQL {
     }
     
     /**
-    * @param $columns mixed
-    * @param $table string
-    * @return string
-    */
+     * @param $columns mixed
+     * @param $table string
+     * @return string
+     */
     public function select($columns, $table)
     {
         // All or one column
@@ -252,22 +252,22 @@ class SQL {
     }
     
     /**
-    * @param array|string $columns
-    * @param string $table
-    * @param array|string $wheres
-    * @param array|string $operators
-    */
+     * @param array|string $columns
+     * @param string $table
+     * @param array|string $wheres
+     * @param array|string $operators
+     */
     public function selectWhere($columns, $table, $wheres, $operators) {
         return $this->select($columns, $table).' '.$this->addWhere($wheres, $operators);
     }
     
     /**
-    * @param string $table
-    * @param array|string $columns
-    * @param array|string $wheres
-    * @param array|string $operators
-    * @return string
-    */
+     * @param string $table
+     * @param array|string $columns
+     * @param array|string $wheres
+     * @param array|string $operators
+     * @return string
+     */
     public function update($table, $columns, $wheres, $operators)
     {
         $snippet = $this->update.$this->addBackticks($table).$this->set.$this->equalPlaceholder($columns, 'c');
@@ -276,20 +276,20 @@ class SQL {
     }
     
     /**
-    * @param string $table
-    * @param array|string $wheres
-    * @param array|string $operators
-    * @return string
-    */
+     * @param string $table
+     * @param array|string $wheres
+     * @param array|string $operators
+     * @return string
+     */
     public function delete($table, $wheres, $operators) {
         return $this->delete.$this->addBackticks($table).' '.$this->addWhere($wheres, $operators);
     }
     
     /**
-    * @access public
-    * @param string $table
-    * @param array|string $columns
-    */
+     * @access public
+     * @param string $table
+     * @param array|string $columns
+     */
     public function insert($table, $columns)
     {
         $snippet = 'INSERT INTO '.$this->addBackticks($table).' ';
