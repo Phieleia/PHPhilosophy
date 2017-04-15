@@ -3,22 +3,15 @@
 namespace Phphilosophy\Http;
 
 /**
- * Phphilosophy Request
+ * Phphilosophy Micro PHP Framework for PHP 7.0
  *
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2015-2016 Lisa Saalfrank
- * @license	http://opensource.org/licenses/MIT MIT License
- * @since       0.1.0
+ * @copyright   2015-2017 Lisa Saalfrank
+ * @license     MIT License http://opensource.org/licenses/MIT
  * @version     0.1.0
  * @package     Phphilosophy
- * @subpackage  Http
  */
 class Request {
-    
-    /**
-     * @var     array   Array with request information
-     */
-    private $request = [];
     
     /**
      * @var string
@@ -31,31 +24,32 @@ class Request {
     private $uri;
     
     /**
-     * @var     array   Array with get/post data
+     * @var array
      */
     private $input = [];
     
     /**
-     * Saves the request data into an array
-     * @return  void
+     * @return  self
      */
-    protected function setRequest()
+    public static function createFromGlobals()
     {
-        // The HTTP request method
-        $this->method = $_SERVER['REQUEST_METHOD'];
-        
-        // The HTTP request URI
-        $this->uri = $_SERVER['REQUEST_URI'];
-        
-        // The query string (with GET data)
-        $this->request['QUERY_STRING'] = (isset($_SERVER['QUERY_STRING'])) ? $_SERVER['QUERY_STRING'] : '';
-        
-        // The PHP Input Stream (with POST data)
-        $this->request['INPUT_STREAM'] = (string) file_get_contents('php://input');
+        $method = $_SERVER['REQUEST_METHOD'];
+        $uri = $_SERVER['REQUEST_URI'];
+        return new static($method, $uri, $_GET, $_POST);
     }
     
-    public function __construct() {
-        $this->setRequest();
+    /**
+     * @param   string  $method
+     * @param   string  $uri
+     * @param   array   $get
+     * @param   array   $post
+     */
+    public function __construct(string $method, string $uri, array $get, array $post)
+    {
+        $this->method = $method;
+        $this->uri = $uri;
+        $this->input['get'] = $get;
+        $this->input['post'] = $post;
     }
     
     /**
@@ -85,56 +79,31 @@ class Request {
     }
     
     /**
-     * @param   string|null $key        GET|POST-key
-     * @param   mixed|null  $default    default value
-     * @param   string      $method     method
-     * @return  mixed|array
+     * @param   string  $method
+     * @param   string  $name
+     * @param   mixed   $default
+     *
+     * @return  mixed
      */
-    private function getInput($key = null, $default = null, $method = 'get')
-    {
-        // If run the first time, parses the query string
-        $this->isParsed($method);
-        
+    private function input(
+        string $method = 'get',
+        string $name = null,
+        $default = null
+    ) {
         // Checks, whether a specific value was requested
-        if (isset($key)) {
-            
+        if (isset($name))
+        {
             // Does the requested value exist?
-            if (isset($this->input[$method][$key])) {
-                
+            if (isset($this->input[$method][$name]))
+            {
                 // Positive: return the value
-                return $this->input[$method][$key];  
-            } 
-            
+                return $this->input[$method][$name];
+            }
             // Negative: the default value
             return $default;
         }
-            
         // return the entire array
         return $this->input[$method];
-    }
-    
-    /**
-     * @param   string  $method     Method
-     * @return  void
-     */
-    private function isParsed($method)
-    {
-        // Checks whether get/post data has been parsed and saved.
-        // If it wasn't, retrieve it, parse it and save it.
-        if (!isset($this->input[$method])) {
-            
-            // Result array
-            $input = [];
-            
-            // source of user input (Input stream or query String)
-            $source = ($method == 'get') ? 'QUERY_STRING' : 'INPUT_STREAM';
-            
-            // Parse input and save to input array
-            parse_str($this->request[$source], $input);
-            
-            // "Cache" Get|Post data
-            $this->input[$method] = $input;
-        }
     }
     
     /**
@@ -143,7 +112,7 @@ class Request {
      * @return  mixed|array
      */
     public function get($key = null, $default = null) {
-        return $this->getInput($key, $default);
+        return $this->input($key, $default);
     }
     
     /**
@@ -152,6 +121,6 @@ class Request {
      * @return  mixed|array
      */
     public function post($key = null, $default = null) {
-        return $this->getInput($key, $default, 'post');
+        return $this->input($key, $default, 'post');
     }
 }
