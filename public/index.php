@@ -12,7 +12,7 @@ use Phphilosophy\Http\Request;
 
 require __DIR__.'/../bootstrap/bootstrap.php';
 
-$request = new Request();
+$request = Request::createFromGlobals();
 Phphilosophy::register($request);
 
 /*
