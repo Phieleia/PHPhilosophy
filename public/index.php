@@ -7,7 +7,7 @@ use Phphilosophy\Http\Request;
  * Phphilosophy index file
  *
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2015-2016 Lisa Saalfrank
+ * @copyright   2015-2017 Lisa Saalfrank
  */
 
 require __DIR__.'/../bootstrap/bootstrap.php';
