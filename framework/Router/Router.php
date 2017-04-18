@@ -5,15 +5,13 @@ namespace Phphilosophy\Router;
 use Phphilosophy\Http\Request;
 
 /**
- * Phphilosophy Router for HTTP routing
+ * Phphilosophy Micro PHP Framework for PHP 7.0
  *
  * @author      Lisa Saalfrank <lisa.saalfrank@web.de>
- * @copyright   2015-2016 Lisa Saalfrank
- * @license	http://opensource.org/licenses/MIT MIT License
- * @since       0.1.0
+ * @copyright   2015-2017 Lisa Saalfrank
+ * @license     MIT License http://opensource.org/licenses/MIT
  * @version     0.1.0
  * @package     Phphilosophy
- * @subpackage  Router
  */
 class Router {
     
@@ -68,7 +66,7 @@ class Router {
      *
      * @return  void
      */
-    private function protect($guard, $redirect)
+    private function protect($guard, string $redirect)
     {
         // Check if the guard went off
         $valid = call_user_func($guard);
